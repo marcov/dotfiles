@@ -1,3 +1,2 @@
-# config_files
 
-Configuration files for various tool and SW
+Configuration files for various tools and SW.
