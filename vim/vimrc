@@ -57,6 +57,9 @@ set scrolloff=7
 " formats:
 autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+" NerdTree not to show files not useful
+let NERDTreeIgnore = ['\.pyc$']
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set tags=~/shared/dev/MSS_NFC_DEV/EEBU_FW_DEV_NFC_V14/src/tags,~/shared/dev/MSS_NFC_DEV/8051/src/versions/current/tags,~/shared/dev/MSS_NCI_TOOLS/tags
 
