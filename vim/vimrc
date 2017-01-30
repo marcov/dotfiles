@@ -61,43 +61,38 @@ autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 let NERDTreeIgnore = ['\.pyc$']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set tags=~/shared/dev/MSS_NFC_DEV/EEBU_FW_DEV_NFC_V14/src/tags,~/shared/dev/MSS_NFC_DEV/8051/src/versions/current/tags,~/shared/dev/MSS_NCI_TOOLS/tags
+"" TAGS
+"set tags=<path/to/1/tags>,<path/to/2/tags>,...
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Vundle plugins manager
+""
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
-" My bundles here:
-"
-" original repos on GitHub
-"Bundle 'tpope/vim-fugitive'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-"Bundle 'tpope/vim-rails.git'
-" vim-scripts repos
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
-" non-GitHub repos
-"Bundle 'git://git.wincent.com/command-t.git'
-" Git repos on your local machine (i.e. when working on your own plugin)
-"Bundle 'file:///Users/gmarik/path/to/plugin'
-" ...
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'The-NERD-tree'
-Bundle 'systemverilog.vim'
-Bundle 'Command-T'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'The-NERD-tree'
+Plugin 'systemverilog.vim'
+Plugin 'Command-T'
 
 filetype plugin indent on     " required!
 
+"All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" YCM options
+""
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
