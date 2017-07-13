@@ -23,6 +23,9 @@ set expandtab                   " tabs are spaces, not tabs
 set tabstop=4                   " an indentation every four columns
 set softtabstop=4               " let backspace delete indent
 
+
+set hid                         " A buffer becomes hidden when it is abandoned
+
 set mouse=a                     " Enable mouse scroll wheel
 
 "Show hidden characters
