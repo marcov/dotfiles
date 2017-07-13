@@ -55,7 +55,9 @@ export PATH=$PATH:/home/marco/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:
 
 export HGEDITOR=vim
 
-source ~/.bash_aliases
+source ~/.mrvl_aliases
+
+source ~/.my_aliases
 
 # Add the HG advanced prompt
 source ~/.promptrc
