@@ -37,8 +37,10 @@ set list
 " Tweak colors for list chars
 highlight SpecialKey guifg=darkgrey ctermfg=darkgrey
 
-
 syntax on
+
+" Colorscheme used on Mac
+colorscheme distinguished
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
@@ -55,13 +57,18 @@ set laststatus=2
 " Keep cursor centered vertically
 set scrolloff=7
 
+" NerdTree not to show files not useful
+let NERDTreeIgnore = ['\.pyc$']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Language Specific here
+
+autocmd Filetype javascript,pug setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
-autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-" NerdTree not to show files not useful
-let NERDTreeIgnore = ['\.pyc$']
+autocmd FileType c,cpp,java,php,javascript,pug autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
@@ -85,11 +92,14 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'The-NERD-tree'
 Plugin 'systemverilog.vim'
 Plugin 'Command-T'
+".pug / .jade files syntax highlight
+Plugin 'digitaltoad/vim-pug'
 
-filetype plugin indent on     " required!
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+filetype on
 filetype plugin indent on    " required
 
 
