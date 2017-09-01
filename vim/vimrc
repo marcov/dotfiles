@@ -1,3 +1,7 @@
+"
+" NOTE: you can reload the vim configuration on-the-fly with :so %
+"
+
 set nocompatible                " must be first line
 set background=dark             " Assume a dark background
 
@@ -68,7 +72,7 @@ autocmd Filetype javascript,pug setlocal expandtab tabstop=2 shiftwidth=2 softta
 
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
-autocmd FileType c,cpp,java,php,javascript,pug autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,javascript,pug,arduino,make autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
