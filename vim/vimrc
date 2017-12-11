@@ -1,6 +1,7 @@
 "
-" NOTE: you can reload the vim configuration on-the-fly with :so %
-"
+" NOTE: 
+"  - you can reload the vim configuration on-the-fly with :so %
+"  - use ':high' to show all highlighting combinations
 
 set nocompatible                " must be first line
 set background=dark             " Assume a dark background
@@ -9,8 +10,8 @@ set term=$TERM                  " Make arrow and other keys work
 set cursorline                  " highlight current line
 
 " Nice color for cursolline
-"hi CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white guibg=darkgrey guifg=white
-hi CursorLine   cterm=NONE ctermbg=darkgrey guibg=darkgrey
+"highlight CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white guibg=darkgrey guifg=white
+highlight CursorLine   cterm=NONE ctermbg=darkgrey guibg=darkgrey
 
 set backspace=indent,eol,start  " backspace for dummys
 set linespace=0                 " No extra spaces between rows
@@ -45,6 +46,8 @@ syntax on
 
 " Colorscheme used on Mac
 colorscheme distinguished
+
+highlight StatusLineNC term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
