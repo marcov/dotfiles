@@ -50,8 +50,8 @@ colorscheme distinguished
 highlight CursorLine   cterm=underline gui=underline guibg=NONE ctermbg=NONE
 
 " Colorize split bar
-highlight StatusLine term=reverse cterm=bold ctermfg=231 ctermbg=25 gui=bold guifg=#ffffff guibg=#005faf
-highlight StatusLineNC term=reverse cterm=bold ctermfg=white ctermbg=darkgrey
+highlight StatusLine term=reverse term=standout cterm=bold ctermfg=228 ctermbg=94 gui=bold guifg=#ffff87 guibg=#875f00
+highlight StatusLineNC term=reverse ctermfg=231 ctermbg=238
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
