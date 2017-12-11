@@ -1,5 +1,5 @@
 "
-" NOTE: 
+" NOTE:
 "  - you can reload the vim configuration on-the-fly with :so %
 "  - use ':high' to show all highlighting combinations
 
@@ -9,9 +9,6 @@ set background=dark             " Assume a dark background
 set term=$TERM                  " Make arrow and other keys work
 set cursorline                  " highlight current line
 
-" Nice color for cursolline
-"highlight CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white guibg=darkgrey guifg=white
-highlight CursorLine   cterm=NONE ctermbg=darkgrey guibg=darkgrey
 
 set backspace=indent,eol,start  " backspace for dummys
 set linespace=0                 " No extra spaces between rows
@@ -47,7 +44,14 @@ syntax on
 " Colorscheme used on Mac
 colorscheme distinguished
 
-highlight StatusLineNC term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
+" Colorize cursolline
+" hihighlight CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=NONE guibg=darkred guifg=NONE
+" This is transparen
+highlight CursorLine   cterm=underline gui=underline guibg=NONE ctermbg=NONE
+
+" Colorize split bar
+highlight StatusLine term=reverse cterm=bold ctermfg=231 ctermbg=25 gui=bold guifg=#ffffff guibg=#005faf
+highlight StatusLineNC term=reverse cterm=bold ctermfg=white ctermbg=darkgrey
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
@@ -71,11 +75,11 @@ let NERDTreeIgnore = ['\.pyc$']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language Specific here
 
-autocmd Filetype javascript,pug setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype javascript,pug,html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
-autocmd FileType c,cpp,java,php,javascript,pug,arduino,make autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,javascript,pug,arduino,make,html autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
