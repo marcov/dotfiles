@@ -8,9 +8,6 @@ set background=dark             " Assume a dark background
 set term=$TERM                  " Make arrow and other keys work
 set cursorline                  " highlight current line
 
-" Nice color for cursolline
-"hi CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white guibg=darkgrey guifg=white
-hi CursorLine   cterm=NONE ctermbg=darkgrey guibg=darkgrey
 
 set backspace=indent,eol,start  " backspace for dummys
 set linespace=0                 " No extra spaces between rows
@@ -46,6 +43,12 @@ syntax on
 " Colorscheme used on Mac
 colorscheme distinguished
 
+" Nice color for cursolline
+" hi CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=NONE guibg=darkred guifg=NONE
+hi CursorLine   cterm=underline gui=underline guibg=NONE ctermbg=NONE
+
+"""""""""""""""""""""""""""""
+
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
 "  1. (on the first tab) a list of completions will be shown and the command will be completed to the longest common command.
@@ -68,11 +71,11 @@ let NERDTreeIgnore = ['\.pyc$']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language Specific here
 
-autocmd Filetype javascript,pug setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype javascript,pug,html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
-autocmd FileType c,cpp,java,php,javascript,pug,arduino,make autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,javascript,pug,arduino,make,html autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
