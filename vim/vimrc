@@ -33,7 +33,8 @@ set mouse=a                     " Enable mouse scroll wheel
 "Show hidden characters
 "set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 "set listchars=tab:>-,trail:-
-set listchars=tab:>-,
+set listchars=tab:»·
+
 set list
 
 " Tweak colors for list chars
@@ -50,8 +51,8 @@ colorscheme distinguished
 highlight CursorLine   cterm=underline gui=underline guibg=NONE ctermbg=NONE
 
 " Colorize split bar
-highlight StatusLine term=reverse term=standout cterm=bold ctermfg=228 ctermbg=94 gui=bold guifg=#ffff87 guibg=#875f00
-highlight StatusLineNC term=reverse ctermfg=231 ctermbg=238
+"highlight StatusLine  term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
+"highlight StatusLineNC term=reverse ctermfg=231 ctermbg=238
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
@@ -83,8 +84,9 @@ autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth
 
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
-autocmd FileType c,cpp,java,php,javascript,pug,arduino,make,html,sh,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+autocmd FileType go set noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
 "set tags=<path/to/1/tags>,<path/to/2/tags>,...
@@ -109,6 +111,8 @@ Plugin 'systemverilog.vim'
 Plugin 'Command-T'
 ".pug / .jade files syntax highlight
 Plugin 'digitaltoad/vim-pug'
+Plugin 'walkermatt/vim-mapfile'
+Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
