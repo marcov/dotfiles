@@ -100,3 +100,7 @@ export GROFF_NO_SGR=1
 
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
 #export KEYTIMEOUT=1
+
+
+# prompt all matches even when typed text is a valid match
+zstyle ':completion:*' accept-exact false
