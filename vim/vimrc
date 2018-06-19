@@ -42,8 +42,6 @@ highlight SpecialKey guifg=darkgrey ctermfg=darkgrey
 
 syntax on
 
-" Colorscheme used on Mac
-colorscheme distinguished
 
 " Colorize cursolline
 " hihighlight CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=NONE guibg=darkred guifg=NONE
@@ -58,7 +56,7 @@ highlight CursorLine   cterm=underline gui=underline guibg=NONE ctermbg=NONE
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
 "  1. (on the first tab) a list of completions will be shown and the command will be completed to the longest common command.
 "  2. (on second tab) the wildmenu will show up with all the completions that were listed before.
-"  To test it out, type ":spe" and then hit tab once to see 1 and hit tab again to see 2. 
+"  To test it out, type ":spe" and then hit tab once to see 1 and hit tab again to see 2.
 
 set wildmenu
 set wildmode=list:longest,full
@@ -107,19 +105,25 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'The-NERD-tree'
-Plugin 'systemverilog.vim'
-Plugin 'Command-T'
+"Plugin 'systemverilog.vim'
+"" Fuzzy file finder
+" Plugin 'Command-T'
+Plugin 'lokaltog/vim-distinguished'
 ".pug / .jade files syntax highlight
 Plugin 'digitaltoad/vim-pug'
 Plugin 'walkermatt/vim-mapfile'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
+"" Another fuzzy file finder
+Plugin 'ctrlp.vim'
+"" vimgrep alternative
+Plugin 'EasyGrep'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
 
+colorscheme distinguished
 filetype on
 filetype plugin indent on    " required
 
@@ -168,5 +172,21 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 
-let g:airline_theme='powerlineish'
+let g:airline_theme='dark'
 
+" Sane Ignore For ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ }
+
+set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
+
+let g:EasyGrepCommand="ack"
+
+
+
+" Make navigation in quickfix window easier
+"map <C-n> :cnext<CR>
+"map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
