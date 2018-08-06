@@ -1,5 +1,5 @@
 
-Host 10.0.0.* *.lan
+Host 10.0.0.* *.lan 127.0.0.* localhost
     # Do no pollute knonw host for local ssh targets 
     CheckHostIP no
     StrictHostKeyChecking no
