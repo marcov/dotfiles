@@ -121,6 +121,8 @@ Plugin 'ctrlp.vim'
 "Plugin 'EasyGrep'
 Plugin 'mileszs/ack.vim'
 Plugin 'fugitive.vim'
+" Heuristically set buffer options
+Plugin 'tpope/vim-sleuth'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required

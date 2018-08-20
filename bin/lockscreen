@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+/usr/bin/mate-screensaver-command -l
+/usr/bin/sleep 1
+/usr/bin/xset dpms force off
+exit 0
