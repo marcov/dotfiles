@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
+#
+# Delete all docker containers listed by `docker ps -a`
+#
 
-containersList="$(docker ps -a --no-trunc | grep -Ev "^CONTAINER" | awk 'BEGIN {FS=" "} {print $1}' | tr "\n" " ")"
+set -euo pipefail
+
+#containersList="$(docker ps -a --no-trunc | grep -Ev "^CONTAINER" | awk 'BEGIN {FS=" "} {print $1}')"
+containersList="$(docker ps -qa --no-trunc)"
 
 if [ -z "$containersList" ]; then
   echo "No containers to remove"
   exit -1
 fi
+
+containersList="$(tr "\n" " " <<< $containersList)"
 
 for c in ${containersList[@]}; do
   docker rm -f "$c"

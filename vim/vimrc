@@ -4,15 +4,20 @@
 "  - use ':high' to show all highlighting combinations
 
 set nocompatible                " must be first line
-set background=dark             " Assume a dark background
+set background=dark
 
-set term=$TERM                  " Make arrow and other keys work
-set cursorline                  " highlight current line
+" nvim support
+if !has('nvim')
+" Make arrow and other keys work
+  set term=$TERM
+endif
 
+" highlight current line
+set cursorline
 
 set backspace=indent,eol,start  " backspace for dummys
 set linespace=0                 " No extra spaces between rows
-set nu                          " Line numbers on
+set number                      " Line numbers on
 set showmatch                   " show matching brackets/parenthesis
 set incsearch                   " find as you type search
 set hlsearch                    " highlight search terms
@@ -35,7 +40,6 @@ set mouse=a                     " Enable mouse scroll wheel
 "set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 "set listchars=tab:>-,trail:-
 set listchars=tab:»·
-
 set list
 
 " Tweak colors for list chars
@@ -43,10 +47,9 @@ highlight SpecialKey guifg=darkgrey ctermfg=darkgrey
 
 syntax on
 
-
 " Colorize cursolline
 " hihighlight CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=NONE guibg=darkred guifg=NONE
-" This is transparen
+" This is transparent
 highlight CursorLine   cterm=underline gui=underline guibg=NONE ctermbg=NONE
 
 " Colorize split bar
@@ -66,24 +69,20 @@ set wildmode=list:longest,full
 set laststatus=2
 
 " Keep cursor centered vertically
-set scrolloff=7
+set scrolloff=5
 
 " Make switching back to Normal mode (w/ ESC) fast.
 set ttimeoutlen=50
 
-
 " NerdTree not to show files not useful
 let NERDTreeIgnore = ['\.pyc$']
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language Specific here
 
-autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
-autocmd FileType c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 autocmd FileType go set noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,43 +94,70 @@ autocmd FileType go set noexpandtab
 "" Vundle plugins manager
 ""
 filetype off                  " required!
-
 set rtp+=~/.vim/bundle/Vundle.vim
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" semantic code completion for C
 Plugin 'Valloric/YouCompleteMe'
+
+" Side bar style file explorer
 Plugin 'The-NERD-tree'
+
+" Verilog syntax highlight
 "Plugin 'systemverilog.vim'
-"" Fuzzy file finder
-" Plugin 'Command-T'
+
+" colorscheme
 Plugin 'lokaltog/vim-distinguished'
-Plugin 'digitaltoad/vim-pug'
+
 Plugin 'walkermatt/vim-mapfile'
+
+" pug / jade HTML template files support
+Plugin 'digitaltoad/vim-pug'
+
+" golang support
 Plugin 'fatih/vim-go'
+
+" status line
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-"" Another fuzzy file finder
+
+" ctrl+p to open a file
 Plugin 'ctrlp.vim'
+
+
 "" vimgrep alternative
 "Plugin 'EasyGrep'
+
+" use ack for file search
 Plugin 'mileszs/ack.vim'
+
+" git
 Plugin 'fugitive.vim'
+
 " Heuristically set buffer options
 Plugin 'tpope/vim-sleuth'
 
+" highlight specific text / words
+"Plugin 'Txtfmt-The-Vim-Highlighter'
+
+" spell checking
+Plugin 'reedes/vim-lexical'
+
+"""""""""" Keep this at the bottom
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme distinguished
 filetype on
 filetype plugin indent on    " required
-
-
+" Make comments italics
+highlight Comment cterm=italic ctermbg=black
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" YCM options
@@ -148,7 +174,7 @@ let g:airline_symbols = {}
 endif
 
 " powerline unicode symbols
-let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = ''
 let g:airline_symbols.crypt = '🔒'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.spell = 'Ꞩ'
@@ -181,8 +207,6 @@ set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
 "let g:EasyGrepRecursive=1
 "let g:EasyGrepSearchCurrentBufferDir=1
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "==================== Mappings =========================
@@ -206,7 +230,7 @@ nmap <leader>p :tabprevious<CR>
 """ closing quickfix window
 nnoremap <leader>a :cclose<CR>
 
-"""""""""" ack.vim plugin 
+"""""""""" ack.vim plugin
 cnoreabbrev Ack Ack!
 nnoremap <Leader>f :Ack!<Space>
 
@@ -216,4 +240,34 @@ nnoremap <leader>* :<C-u>let @/ = expand('<cword>')<cr>
 
 """""""""" Visual block, cause <C-v is not working with current mappings
 command! VisualBlock execute "normal! \<C-v>"
+
+
+"""""""""" italic font support
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
+
+""""""""" Alternate screen (when backgrounding vim)
+"set t_ti= t_te=
+
+
+augroup osc_fix_highlight
+  " Set the filetype based on the file's extension, but only if
+  " 'filetype' has not already been set
+  autocmd BufRead,BufNewFile _service setfiletype html
+  autocmd BufRead,BufNewFile *.spec-template setfiletype spec
+augroup END
+
+
+"""""""""  vim-lexical config
+augroup lexical
+  autocmd!
+  autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT* call lexical#init()
+  autocmd FileType textile call lexical#init()
+  autocmd FileType text call lexical#init({ 'spell': 0 })
+augroup END
+
+""""""""" override euristic indentation for this files...
+autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 

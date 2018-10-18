@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
+#
+# Delete all untagged docker images; i.e. images listed by `docker images` where TAG is <none>
+#
+set -euo pipefail
 
-imagesList="$(docker images | grep -E "^<none>" | awk 'BEGIN {FS=" "} {print $3}' | tr "\n" " ")"
+imagesList="$(docker images | grep -E "^<none>" | awk 'BEGIN {FS=" "} {print $3}')"
 
 if [ -z "$imagesList" ]; then
   echo "No <none> images to remove"
   exit -1
 fi
+
+imagesList="$(tr "\n" " " <<< $imagesList)"
 
 for i in ${imagesList[@]}; do
   docker rmi "$i"
