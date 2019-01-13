@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -o pipefail
+
+OBS_USERNAME=mvedovati
+read -e -p "Enter the project name: " PRJ_NAME
+
+tmpFile=$(mktemp)
+
+cat <<EOF > $tmpFile
+ <project name="$PRJ_NAME">
+   <title/>
+   <description/>
+   <person userid="$OBS_USERNAME" role="bugowner"/>
+   <person userid="$OBS_USERNAME" role="maintainer"/>
+ </project>
+EOF
+
+osc meta prj $PRJ_NAME -F $tmpFile
+
+rm -r $tmpFile
+
+exit 0
+
