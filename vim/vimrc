@@ -74,6 +74,9 @@ set scrolloff=5
 " Make switching back to Normal mode (w/ ESC) fast.
 set ttimeoutlen=50
 
+" 80 chars column marker
+set colorcolumn=80
+
 " NerdTree not to show files not useful
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -140,7 +143,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'fugitive.vim'
 
 " Heuristically set buffer options
-Plugin 'tpope/vim-sleuth'
+"Plugin 'tpope/vim-sleuth'
 
 " highlight specific text / words
 "Plugin 'Txtfmt-The-Vim-Highlighter'
@@ -262,9 +265,7 @@ augroup END
 """""""""  vim-lexical config
 augroup lexical
   autocmd!
-  autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT* call lexical#init()
-  autocmd FileType textile call lexical#init()
-  autocmd FileType text call lexical#init({ 'spell': 0 })
+  autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile call lexical#init()
 augroup END
 
 """"""""" override euristic indentation for this files...
