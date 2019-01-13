@@ -1,4 +1,5 @@
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias sudo="/usr/bin/sudo -E"
+alias ips="ip -c -br -4  -h a show"
 #alias podman="/usr/bin/sudo -E ~/go/src/github.com/projectatomic/libpod/bin/podman"
