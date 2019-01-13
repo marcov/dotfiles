@@ -54,7 +54,6 @@ ZSH_THEME="flazz-mv"
 plugins=(colored-man-pages colorize docker git git-extras gnu-utils golang kubectl kube-ps1 sudo systemd)
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$HOME/go/bin:/home/marco/perl5/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 #TERM
@@ -102,7 +101,7 @@ unsetopt AUTO_CD
 export MAN_POSIXLY_CORRECT=
 # Make colored man pages work on openSUSE
 export GROFF_NO_SGR=1
-# Run crictl without endpoint when talking to the local daemon
+# Set crictl default endpoint to crio
 export CONTAINER_RUNTIME_ENDPOINT=unix:///var/run/crio/crio.sock
 # GOPATH
 export GOPATH=$HOME/go
@@ -126,3 +125,9 @@ PERL5LIB="/home/marco/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB
 PERL_LOCAL_LIB_ROOT="/home/marco/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/marco/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/marco/perl5"; export PERL_MM_OPT;
+
+# kata dev env
+export KATA_DEV_MODE=true
+
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${HOME}/bin:${GOPATH}/bin:/home/marco/perl5/bin"
+export EDITOR=vi
