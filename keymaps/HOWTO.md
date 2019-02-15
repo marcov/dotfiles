@@ -10,7 +10,6 @@ Keys keycodes:
 
 `showkey [-a]`
 
-
 ## X
 
 ### Temp specify a custom mapping for the current session
@@ -20,10 +19,10 @@ Keys keycodes:
 
 ### Change a keymap for X
 
-- Get your layout with `setxbmap -query`
+- Get your layout with `setxkbmap -query`
 - Edit the file name corresponding to your layout in `/usr/share/X11/xkb/symbols/`
 - E.g. if your layout is `us`, then edit `/usr/share/X11/xkb/symbols/us`.
-- Apply changes by rebooting or with `setxkbmap -layout <layout name>`.
+- Apply changes by rebooting OR with `setxkbmap -layout <layout name>`.
 
 ## Console
 
