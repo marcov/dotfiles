@@ -85,9 +85,12 @@ let NERDTreeIgnore = ['\.pyc$']
 
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
-autocmd FileType c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType
+    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml autocmd
+    \ BufWritePre <buffer> :%s/\s\+$//e
 
 autocmd FileType go set noexpandtab
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
 "set tags=<path/to/1/tags>,<path/to/2/tags>,...
@@ -132,6 +135,9 @@ Plugin 'vim-airline/vim-airline-themes'
 " ctrl+p to open a file
 Plugin 'ctrlp.vim'
 
+" Rust 
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
 
 "" vimgrep alternative
 "Plugin 'EasyGrep'
@@ -148,8 +154,11 @@ Plugin 'fugitive.vim'
 " highlight specific text / words
 "Plugin 'Txtfmt-The-Vim-Highlighter'
 
-" spell checking
+" spell checking - use zg to add a word to dictionary
 Plugin 'reedes/vim-lexical'
+
+" C syntax highlighting
+"Plugin 'bbchung/Clamp'
 
 """""""""" Keep this at the bottom
 "All of your Plugins must be added before the following line
@@ -158,6 +167,7 @@ call vundle#end()            " required
 
 colorscheme distinguished
 filetype on
+filetype plugin on "when a file is edited its plugin file is loaded
 filetype plugin indent on    " required
 " Make comments italics
 highlight Comment cterm=italic ctermbg=black
@@ -178,9 +188,10 @@ endif
 
 " powerline unicode symbols
 let g:airline_symbols.linenr = ''
-let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.crypt = ''
 let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.spell = 'Ꞩ'
+"let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.spell = 'X'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_left_sep = ''
@@ -238,21 +249,19 @@ cnoreabbrev Ack Ack!
 nnoremap <Leader>f :Ack!<Space>
 
 
-"""""""""" Highlight the current word under cursor with <leader>*
-nnoremap <leader>* :<C-u>let @/ = expand('<cword>')<cr>
+"""""""""" Highlight the current word under cursor 
+"nnoremap <leader>\ :<C-u>let @/ = expand('<cword>')<cr>
+nnoremap <leader>\ :exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))<cr>
 
 """""""""" Visual block, cause <C-v is not working with current mappings
 command! VisualBlock execute "normal! \<C-v>"
-
 
 """""""""" italic font support
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
-
 """"""""" Alternate screen (when backgrounding vim)
 "set t_ti= t_te=
-
 
 augroup osc_fix_highlight
   " Set the filetype based on the file's extension, but only if
@@ -271,4 +280,17 @@ augroup END
 """"""""" override euristic indentation for this files...
 autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+
+"""""""" vim-racer
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+let g:racer_experimental_completer = 1
+
+""""""" vim-go specific config
+"" use gpls for GoDef, GoInfo
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
