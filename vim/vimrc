@@ -251,7 +251,13 @@ nnoremap <Leader>f :Ack!<Space>
 
 """""""""" Highlight the current word under cursor 
 "nnoremap <leader>\ :<C-u>let @/ = expand('<cword>')<cr>
-nnoremap <leader>\ :exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))<cr>
+"nnoremap <leader>\ :exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))<cr>
+"
+"Note, this is used to write in "/" register:
+" :let @/ = "foobar"
+
+nnoremap <leader>\ :<C-u>let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
+
 
 """""""""" Visual block, cause <C-v is not working with current mappings
 command! VisualBlock execute "normal! \<C-v>"
