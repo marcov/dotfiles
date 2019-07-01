@@ -129,5 +129,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/marco/perl5"; export PERL_MM_OPT;
 # kata dev env
 export KATA_DEV_MODE=true
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${HOME}/bin:${GOPATH}/bin:/home/marco/perl5/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${HOME}/bin:${GOPATH}/bin:$HOME/perl5/bin:$HOME/.cargo/bin"
 export EDITOR=vi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
