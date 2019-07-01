@@ -86,10 +86,13 @@ let NERDTreeIgnore = ['\.pyc$']
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
 autocmd FileType
-    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml autocmd
+    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml,rust autocmd
     \ BufWritePre <buffer> :%s/\s\+$//e
 
 autocmd FileType go set noexpandtab
+
+
+"autocmd FileType javascript autocmd BufWritePre <buffer> :call EsBeautifier()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
@@ -160,6 +163,21 @@ Plugin 'reedes/vim-lexical'
 " C syntax highlighting
 "Plugin 'bbchung/Clamp'
 
+"Plugin 'neoclide/coc.nvim'
+
+" External syntax checker (used by rust.vim)
+Plugin 'Syntastic'
+
+"Browse tags for current file (used by rust.vim)
+Plugin 'Tagbar'
+
+"es-beautifier manually loaded, howto:
+" cd ~/.vim/bundle/
+" git clone git@github.com:dai-shi/es-beautifier.git
+" cd es-beautifier
+" npm install
+set runtimepath^=~/.vim/bundle/es-beautifier/contrib/vim
+
 """""""""" Keep this at the bottom
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -222,6 +240,10 @@ set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
 "let g:EasyGrepSearchCurrentBufferDir=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Do not delete % when joining lines starting with %
+:set formatoptions-=j
+
 
 "==================== Mappings =========================
 "
@@ -287,9 +309,11 @@ augroup END
 autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
+"""""""" rust.vim
+let g:rustfmt_autosave = 1
 
 """""""" vim-racer
-au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap <C-]> <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
@@ -300,3 +324,15 @@ let g:racer_experimental_completer = 1
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
+"""""""" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"""""""" Tagbar
+nmap <F8> :TagbarToggle<CR>
