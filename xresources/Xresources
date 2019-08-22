@@ -43,7 +43,7 @@
 #define S_cyan          #2aa198
 #define S_green         #859900
 
-URxvt*background:            [90]S_base04
+URxvt*background:            [97]S_base04
 URxvt*foreground:            S_base00
 URxvt*depth:                 32
 URxvt*fading:                40
@@ -101,8 +101,9 @@ URxvt*Xft.hinting:    1
 URxvt*Xft.antialias:  1
 
 ! -- Fonts -- !
-URxvt.font: xft:Meslo LG M DZ for Powerline:pixelsize=13.4:antialias=true:hinting=full
-URxvt.boldFont: xft:Meslo LG M DZ for Powerline:style=bold:pixelsize=13.4:uantialias=true:hinting=full
+!! Font from: https://github.com/ryanoasis/nerd-fonts: patched-fonts/Meslo/M-DZ/Regular/complete/Meslo LG M DZ Regular Nerd Font Complete.ttf
+URxvt.font: xft:MesloLGMDZ Nerd Font:pixelsize=13.4:antialias=true:hinting=full
+URxvt.boldFont: xft:MesloLGMDZ Nerd Font:style=bold:pixelsize=13.4:uantialias=true:hinting=full
 
 !!*faceSize:              10
 URxvt*bellIsUrgent:          true
