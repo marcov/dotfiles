@@ -51,7 +51,7 @@ ZSH_THEME="flazz-mv"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages colorize docker git git-extras gnu-utils golang kubectl kube-ps1 sudo systemd)
+plugins=(colored-man-pages colorize docker git git-extras gnu-utils kubectl kube-ps1 sudo systemd)
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
