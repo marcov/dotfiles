@@ -1,0 +1,19 @@
+#!/bin/bash
+
+[ "$#" = "0" ] && { echo "Usage: $(basename "$0") <shell command in \$PATH | file path>"; exit 0; }
+
+[ "$#" != "1" ] && { echo "ERROR: needs exactly one argument"; exit -1; }
+
+declare fullpath=
+
+if [[ "$1" =~ ^/ ]]; then
+	fullpath="$1"
+elif [[ "$1" =~ ^\. ]]; then
+	fullpath="$PWD/$1"
+else
+	fullpath="$(which $1 2>/dev/null)"
+fi
+
+[ -z "$fullpath" ] && { echo "ERROR: failed to resolve full path for \"$1\""; exit -1; }
+
+rpm -q --whatprovides "$fullpath"
