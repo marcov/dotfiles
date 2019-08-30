@@ -1,6 +1,9 @@
+# Colors palette:
+#for i in {1..256}; do echo ${FG[$i]} color $i -- hey nice color; done
+#
 if [ "$USER" = "root" ]
 then CARETCOLOR="${fg[red]}"
-else CARETCOLOR="$FG[069]"
+else CARETCOLOR="$FG[111]"
 fi
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
