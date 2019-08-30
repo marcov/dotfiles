@@ -295,12 +295,15 @@ let g:ack_autoclose = 1
 "Note, this is used to write in "/" register:
 " :let @/ = "foobar"
 
-nnoremap <leader>\ :<C-u>let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
+nnoremap <C-h> :<C-u>let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
 
 """""""" ctrl-P for MRU files
-map  <C-k> :CtrlPMRUFiles<CR>
+nnoremap  <C-k> :CtrlPMRUFiles<CR>
 
-""""""""
+"""""""" ctrl-P for MRU files
+nnoremap  <C-q> :set rnu!<CR>
+
+"""""""" Save buffer using :W, to avoid read-only failure
 "command! W w !sudo tee % > /dev/null
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
