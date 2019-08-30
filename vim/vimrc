@@ -272,8 +272,8 @@ set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
 "map <C-n> :cnext<CR>
 "map <C-m> :cprevious<CR>
 
-nmap <leader>n :tabnext<CR>
-nmap <leader>p :tabprevious<CR>
+nnoremap <leader>n :tabnext<CR>
+nnoremap <leader>p :tabprevious<CR>
 
 """ closing quickfix window
 nnoremap <leader>a :cclose<CR>
@@ -373,6 +373,3 @@ map [[ ?{$<CR>w99[{:nohls<CR>
 map ][ /^}$<CR>b99]}:nohls<CR>
 map ]] j0[[%/{$<CR>0:nohls<CR>
 map [] k$][%?^}$<CR>:nohls<CR>
-
-
-
