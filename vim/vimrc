@@ -123,6 +123,7 @@ Plugin 'Valloric/YouCompleteMe'
 
 " colorscheme
 Plugin 'lokaltog/vim-distinguished'
+Plugin 'NLKNguyen/papercolor-theme'
 
 Plugin 'walkermatt/vim-mapfile'
 
@@ -187,7 +188,8 @@ set runtimepath^=~/.vim/bundle/es-beautifier/contrib/vim
 call vundle#end()            " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme distinguished
+"colorscheme distinguished
+colorscheme PaperColor
 filetype on
 filetype plugin on "when a file is edited its plugin file is loaded
 filetype plugin indent on    " required
