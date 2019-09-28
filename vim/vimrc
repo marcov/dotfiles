@@ -87,8 +87,8 @@ set colorcolumn=81
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
 autocmd FileType
-    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml,rust autocmd
-    \ BufWritePre <buffer> :%s/\s\+$//e
+    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml,rust,python,vim
+    \ autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 autocmd FileType go set noexpandtab
 
@@ -140,8 +140,10 @@ Plugin 'vim-airline/vim-airline-themes'
 " ctrl+p to open a file
 Plugin 'ctrlp.vim'
 
-" Rust 
+" Rust
+" This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
 Plugin 'rust-lang/rust.vim'
+" Racer - code completion for Rust (used  for Rust go to definition)
 Plugin 'racer-rust/vim-racer'
 
 "" vimgrep alternative
@@ -176,7 +178,10 @@ Plugin 'Tagbar'
 "Fuzzy  finder
 Plugin 'junegunn/fzf.vim'
 
-"es-beautifier manually loaded, howto:
+" Auto format
+Plugin 'Chiel92/vim-autoformat'
+
+"Plugin: es-beautifier manually loaded here, how to:
 " cd ~/.vim/bundle/
 " git clone git@github.com:dai-shi/es-beautifier.git
 " cd es-beautifier
@@ -188,7 +193,9 @@ set runtimepath^=~/.vim/bundle/es-beautifier/contrib/vim
 call vundle#end()            " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"colorscheme distinguished
+" Colorscheme changelog:
+" - distinguished
+" - desert
 colorscheme PaperColor
 filetype on
 filetype plugin on "when a file is edited its plugin file is loaded
@@ -265,8 +272,9 @@ set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
 "map <C-h> <C-W>h
 "map <C-l> <C-W>l
 
-" Fast saving
-"nnoremap <leader>w :w!<cr>
+" Use jk sequence to exit insert mode
+inoremap jk <Esc>
+" You have 150ms to do that!
 
 """ Make navigation in quickfix window easier
 "map <C-n> :cnext<CR>
@@ -288,7 +296,7 @@ let g:ackhighlight = 1
 let g:ack_autoclose = 1
 "let g:ack_autofold_results = 1
 
-"""""""""" Highlight the current word under cursor 
+"""""""""" Highlight the current word under cursor
 "nnoremap <leader>\ :<C-u>let @/ = expand('<cword>')<cr>
 "nnoremap <leader>\ :exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))<cr>
 "
@@ -339,15 +347,17 @@ hi SpellBad ctermfg=darkred ctermbg=None
 autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
-"""""""" rust.vim
+"""""""" rust.vim format on save
 let g:rustfmt_autosave = 1
 
 """""""" vim-racer
 au FileType rust nmap <C-]> <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
-let g:racer_experimental_completer = 1
+" Using ycmd for completion...
+"let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
+" It's in $PATH already
+"let g:racer_cmd = "~/bin/racer"
+
 
 """"""" vim-go specific config
 "" use gpls for GoDef, GoInfo
@@ -364,9 +374,11 @@ let g:go_info_mode='gopls'
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-
 """""""" Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+"""""""" Auto format
+autocmd Filetype python     autocmd BufWritePre <buffer> :Autoformat
 
 """""""" custom mapping for text object motions
 map [[ ?{$<CR>w99[{:nohls<CR>
