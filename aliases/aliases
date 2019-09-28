@@ -1,11 +1,18 @@
+#macOS-like clipboard copy/paste
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias sudo="/usr/bin/sudo -E"
 alias ips="ip -c -br -4  -h a show"
-#alias podman="/usr/bin/sudo -E ~/go/src/github.com/projectatomic/libpod/bin/podman"
-alias ag="ag --hidden"
+alias ag="ag --hidden --ignore-dir .git"
+
 # Stolen from jlefrique :)
 alias wtr='curl wttr.in'
 alias wtrnow='curl "wttr.in?0"'
+
 alias vi="TERM=screen-256color vi"
 alias cgdb="TERM=screen-256color cgdb"
+
+# hex 2 decimal
+alias d2h='__d2h(){ bc <<<"obase=16; ibase=10; $1"}; __d2h'
+# decimal 2 hex (zsh style...)
+alias h2d='__h2d(){ bc <<<"obase=10; ibase=16; ${(U)1}"}; __h2d'
