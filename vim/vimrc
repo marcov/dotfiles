@@ -278,8 +278,9 @@ set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Do not delete % when joining lines starting with %
-:set formatoptions-=j
+set formatoptions-=j
 
+set diffopt+=vertical
 
 "==================== Mappings =========================
 "
