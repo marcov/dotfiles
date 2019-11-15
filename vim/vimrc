@@ -162,6 +162,10 @@ Plug 'junegunn/fzf.vim'
 " Auto format
 Plug 'Chiel92/vim-autoformat'
 
+" Auto tags mgmt
+Plug 'ludovicchabant/vim-gutentags'
+
+
 "Plugin: es-beautifier manually loaded here, how to:
 " cd ~/.vim/bundle/
 " git clone git@github.com:dai-shi/es-beautifier.git
@@ -408,3 +412,30 @@ map [[ ?{$<CR>w99[{:nohls<CR>
 map ][ /^}$<CR>b99]}:nohls<CR>
 map ]] j0[[%/{$<CR>0:nohls<CR>
 map [] k$][%?^}$<CR>:nohls<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""" vim-gutentags
+function! GutentagsFilter(path) abort
+    """"
+    """"  TEMP HACK
+    """"
+    if fnamemodify(a:path, ':e') == 'cpp'
+      return 0
+    elseif fnamemodify(a:path, ':e') == 'hpp'
+      return 0
+    elseif fnamemodify(a:path, ':e') == 'c'
+      return 0
+    elseif fnamemodify(a:path, ':e') == 'h'
+      return 0
+    elseif fnamemodify(a:path, ':e') == 'sh'
+      return 1
+    elseif fnamemodify(a:path, ':e') == 'python'
+      return 0
+    endif
+
+    return 0
+endfunction
+let g:gutentags_enabled_user_func = 'GutentagsFilter'
+let g:gutentags_ctags_tagfile = '.tags'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
