@@ -316,6 +316,9 @@ nnoremap <leader>p :tabprevious<CR>
 """ closing quickfix window
 nnoremap <leader>a :cclose<CR>
 
+"""""""" relative lines numbers
+nnoremap  <C-q> :set rnu!<CR>
+
 """""""""" ack.vim plugin
 cnoreabbrev Ack Ack!
 nnoremap <Leader>f :Ack!<Space>
@@ -335,9 +338,6 @@ let g:ack_autoclose = 1
 
 nnoremap <C-h> :<C-u>let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
 
-
-"""""""" ctrl-P for MRU files
-nnoremap  <C-q> :set rnu!<CR>
 
 """""""" Save buffer using :W, to avoid read-only failure
 "command! W w !sudo tee % > /dev/null
