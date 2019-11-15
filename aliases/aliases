@@ -3,7 +3,7 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias sudo="/usr/bin/sudo -E"
 alias ips="ip -c -br -4  -h a show"
-alias ag="ag --hidden --ignore-dir .git"
+alias ag="ag --hidden --ignore-dir .git --ignore .tags"
 
 # Stolen from jlefrique :)
 alias wtr='curl wttr.in'
