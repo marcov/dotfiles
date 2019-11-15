@@ -265,11 +265,12 @@ let g:airline#extensions#tabline#enabled = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sane Ignore For ctrlp
+"""" ctrlp options
+nnoremap  <C-l> :CtrlPMRUFiles<CR>
+
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|o|a|P)$',
   \ }
 
 set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
@@ -334,8 +335,6 @@ let g:ack_autoclose = 1
 
 nnoremap <C-h> :<C-u>let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
 
-"""""""" ctrl-P for MRU files
-nnoremap  <C-k> :CtrlPMRUFiles<CR>
 
 """""""" ctrl-P for MRU files
 nnoremap  <C-q> :set rnu!<CR>
