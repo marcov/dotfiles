@@ -32,9 +32,11 @@ set softtabstop=4               " let backspace delete indent
 
 set ttyfast
 
-set hid                         " A buffer becomes hidden when it is abandoned
+set hidden                      " A buffer becomes hidden when it is abandoned
 
 set mouse=a                     " Enable mouse scroll wheel
+
+set signcolumn=yes              "Always show signcolumn
 
 "Show hidden characters
 "set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
@@ -42,6 +44,9 @@ set mouse=a                     " Enable mouse scroll wheel
 set listchars=tab:»·
 set list
 
+"set termguicolors
+
+"set previewwindow
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Tweak colors for list chars
@@ -216,7 +221,7 @@ let g:ycm_add_preview_to_completeopt = 1
 "" Powerline options
 
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+ let g:airline_symbols = {}
 endif
 
 " powerline unicode symbols
@@ -341,7 +346,7 @@ augroup lexical
   autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile call lexical#init()
 augroup END
 
-hi SpellBad ctermfg=darkred ctermbg=None
+highlight SpellBad ctermfg=darkred ctermbg=None
 
 """"""""" override euristic indentation for this files...
 autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
