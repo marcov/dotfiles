@@ -298,6 +298,11 @@ inoremap jk <Esc>
 "map <C-n> :cnext<CR>
 "map <C-m> :cprevious<CR>
 
+""" Buffers navigation
+nnoremap <C-j> :bnext<CR>
+nnoremap <C-k> :bprevious<CR>
+
+""" Tabs navigation
 nnoremap <leader>n :tabnext<CR>
 nnoremap <leader>p :tabprevious<CR>
 
