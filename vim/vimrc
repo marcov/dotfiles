@@ -67,7 +67,7 @@ set scrolloff=5
 " Make switching back to Normal mode (w/ ESC) fast.
 set ttimeoutlen=50
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language Specific here
 
 " Remove trailing spaces automatically before when saving, for specific file
@@ -81,7 +81,7 @@ autocmd FileType go set noexpandtab
 
 "autocmd FileType javascript autocmd BufWritePre <buffer> :call EsBeautifier()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" TAGS
 "set tags=<path/to/1/tags>,<path/to/2/tags>,...
 
@@ -221,7 +221,7 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 set colorcolumn=81
 highlight ColorColumn ctermbg=233
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" YCM options
 ""
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
@@ -229,7 +229,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" airline options
 
 """"""" Unicode symbols: NOT NEEDED if "g:airline_powerline_fonts = 1"
@@ -263,7 +263,7 @@ let g:airline_powerline_fonts = 1
 " tabline shows the list of buffers on top
 let g:airline#extensions#tabline#enabled = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sane Ignore For ctrlp
@@ -275,13 +275,13 @@ let g:ctrlp_custom_ignore = {
 set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "let g:EasyGrepCommand='1'
 "let g:EasyGrepRecursive=1
 "let g:EasyGrepSearchCurrentBufferDir=1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Do not delete % when joining lines starting with %
 set formatoptions-=j
