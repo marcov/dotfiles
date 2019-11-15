@@ -278,10 +278,6 @@ set wildignore+=**/bower_components/**,**/node_modules/**,**vendor/bundle**
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"let g:EasyGrepCommand='1'
-"let g:EasyGrepRecursive=1
-"let g:EasyGrepSearchCurrentBufferDir=1
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Do not delete % when joining lines starting with %
