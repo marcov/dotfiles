@@ -86,10 +86,6 @@ autocmd FileType go set noexpandtab
 "set tags=<path/to/1/tags>,<path/to/2/tags>,...
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" fzf plugin
-set rtp+=/usr/bin/fzf
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Plug plugins manager
 ""
 call plug#begin('~/.vim/plugged')
@@ -157,14 +153,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Browse tags for current file (used by rust.vim)
 Plug 'vim-scripts/Tagbar'
 
-"Fuzzy  finder
-Plug 'junegunn/fzf.vim'
-
 " Auto format
 Plug 'Chiel92/vim-autoformat'
 
 " Auto tags mgmt
 Plug 'ludovicchabant/vim-gutentags'
+
+" fuzzy finder
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+" Plug 'junegunn/fzf.vim'
 
 
 "Plugin: es-beautifier manually loaded here, how to:
