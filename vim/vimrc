@@ -49,20 +49,6 @@ set list
 "set previewwindow
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Tweak colors for list chars
-highlight SpecialKey guifg=darkgrey ctermfg=darkgrey
-
-syntax on
-
-" Colorize cursolline
-" hihighlight CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=NONE guibg=darkred guifg=NONE
-" This is transparent
-highlight CursorLine   cterm=underline gui=underline guibg=NONE ctermbg=NONE
-
-" Colorize split bar
-"highlight StatusLine  term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
-"highlight StatusLineNC term=reverse ctermfg=231 ctermbg=238
-
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
 "  1. (on the first tab) a list of completions will be shown and the command will be completed to the longest common command.
@@ -80,11 +66,6 @@ set scrolloff=5
 
 " Make switching back to Normal mode (w/ ESC) fast.
 set ttimeoutlen=50
-
-" 80 chars column marker
-set colorcolumn=81
-""" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-""" match OverLength /\%81v.*/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language Specific here
@@ -197,17 +178,48 @@ set runtimepath^=~/.vim/bundle/es-beautifier/contrib/vim
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""" COLORS """""""""""""""""""""""""""""""""""""""""
+set t_Co=256
+syntax on
 
 " Colorscheme changelog:
 " - distinguished
 " - desert
+" - PaperColor
+" - minimalist
 colorscheme PaperColor
 filetype on
 filetype plugin on "when a file is edited its plugin file is loaded
 filetype plugin indent on    " required
 " Make comments italics
 highlight Comment cterm=italic ctermbg=NONE
-highlight Normal guibg=NONE ctermbg=NONE
+highlight Normal guibg=NONE ctermbg=232
+
+" CursorLine match with BG
+"highlight CursorLine ctermbg=234 cterm=NONE
+highlight CursorLine ctermbg=8 cterm=NONE
+
+" CursorLine transparent
+" highlight CursorLine cterm=underline gui=underline guibg=NONE ctermbg=NONE
+
+
+" Tweak colors for list chars
+highlight SpecialKey guifg=darkgrey ctermfg=darkgrey
+
+" Colorize split bar
+"highlight StatusLine  term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
+"highlight StatusLineNC term=reverse ctermfg=231 ctermbg=238
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%120v.*/
+
+" Show trailing whitespace
+highlight ExtraWhitespace ctermbg=darkred guibg=darkred
+match ExtraWhitespace /\s\+\%#\@<!$/
+
+" 80 chars column marker
+set colorcolumn=81
+highlight ColorColumn ctermbg=233
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" YCM options
