@@ -73,7 +73,7 @@ set ttimeoutlen=50
 " Remove trailing spaces automatically before when saving, for specific file
 " formats:
 autocmd FileType
-    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml,rust,python,vim
+    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml,rust,python,vim,xml
     \ autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 autocmd FileType go set noexpandtab
