@@ -89,95 +89,90 @@ autocmd FileType go set noexpandtab
 "" fzf plugin
 set rtp+=/usr/bin/fzf
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Vundle plugins manager
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Plug plugins manager
 ""
-filetype off                  " required!
-set rtp+=~/.vim/bundle/Vundle.vim
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " semantic code completion for C
 Plugin 'Valloric/YouCompleteMe'
 
 " Verilog syntax highlight
-"Plugin 'systemverilog.vim'
+"Plug 'systemverilog.vim'
 
 " colorscheme
-Plugin 'lokaltog/vim-distinguished'
-Plugin 'NLKNguyen/papercolor-theme'
+Plug 'lokaltog/vim-distinguished'
+Plug 'NLKNguyen/papercolor-theme'
 
-Plugin 'walkermatt/vim-mapfile'
+
+Plug 'walkermatt/vim-mapfile'
 
 " pug / jade HTML template files support
-Plugin 'digitaltoad/vim-pug'
+Plug 'digitaltoad/vim-pug'
 
 " golang support
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 " status line
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " ctrl+p to open a file
-Plugin 'ctrlp.vim'
+Plug 'vim-scripts/ctrlp.vim'
+
 
 " Rust
 " This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 " Racer - code completion for Rust (used  for Rust go to definition)
-Plugin 'racer-rust/vim-racer'
+Plug 'racer-rust/vim-racer'
 
 "" vimgrep alternative
-"Plugin 'EasyGrep'
+"Plug 'EasyGrep'
 
 " use ack for file search
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 
 " git
-Plugin 'fugitive.vim'
+Plug 'vim-scripts/fugitive.vim'
 
 " Heuristically set buffer options
-"Plugin 'tpope/vim-sleuth'
+"Plug 'tpope/vim-sleuth'
 
 " highlight specific text / words
-"Plugin 'Txtfmt-The-Vim-Highlighter'
+"Plug 'Txtfmt-The-Vim-Highlighter'
 
 " spell checking - use zg to add a word to dictionary
-Plugin 'reedes/vim-lexical'
+Plug 'reedes/vim-lexical'
 
 " C syntax highlighting
-"Plugin 'bbchung/Clamp'
+"Plug 'bbchung/Clamp'
 
 "Plugin 'neoclide/coc.nvim'
 
 " External syntax checker (used by rust.vim)
-"Plugin 'Syntastic'
+"Plug 'Syntastic'
 
 "Browse tags for current file (used by rust.vim)
-Plugin 'Tagbar'
+Plug 'vim-scripts/Tagbar'
 
 "Fuzzy  finder
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
 " Auto format
-Plugin 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 
 "Plugin: es-beautifier manually loaded here, how to:
 " cd ~/.vim/bundle/
 " git clone git@github.com:dai-shi/es-beautifier.git
 " cd es-beautifier
 " npm install
-set runtimepath^=~/.vim/bundle/es-beautifier/contrib/vim
+Plug '~/.vim/bundle/es-beautifier/contrib/vim'
 
-"""""""""" Keep this at the bottom
 "All of your Plugins must be added before the following line
-call vundle#end()            " required
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#end()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 """"""""""""""""""""""""""""""" COLORS """""""""""""""""""""""""""""""""""""""""
 set t_Co=256
 syntax on
