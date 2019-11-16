@@ -135,17 +135,17 @@ font:
     # The `style` can be specified to pick a specific face.
     #style: Italic
   normal:
-    family: MesloLGMDZ Nerd Font
+    family: MesloLGMDZ Nerd Font Mono
     style: Regular
   bold:
-    family: MesloLGMDZ Nerd Font
+    family: MesloLGMDZ Nerd Font Mono
     style: Bold
   italic:
-    family: MesloLGMDZ Nerd Font
+    family: MesloLGMDZ Nerd Font Mono
     style: Italic
 
   # Point size
-  size: 10.5
+  size: 16.5
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -334,7 +334,7 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.93
+background_opacity: 0.95
 
 # Mouse bindings
 #
@@ -379,7 +379,7 @@ mouse:
     #   - (Linux) xdg-open
     #   - (Windows) explorer
     launcher:
-      program: xdg-open
+      program: open
       args: []
 
     # URL modifiers
@@ -422,10 +422,10 @@ live_config_reload: true
 #   - (macOS) /bin/bash --login
 #   - (Linux) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+shell:
+  program: /bin/zsh
+  args:
+    - --login
 
 # Startup directory
 #
@@ -588,6 +588,34 @@ key_bindings:
   #- { key: Q,      mods: Command,         action: Quit             }
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
+
+  # (macOS) Make ALT-<key> work as intended
+  - { key: J,        mods: Alt,     chars: "\x1bj"                       }
+  - { key: K,        mods: Alt,     chars: "\x1bk"                       }
+  - { key: H,        mods: Alt,     chars: "\x1bh"                       }
+  - { key: L,        mods: Alt,     chars: "\x1bl"                       }
+  #
+  - { key: C,  mods: Alt,           chars: "\x1bc"                       }
+  - { key: F,  mods: Alt,           chars: "\x1bf"                       }
+  - { key: B,  mods: Alt,           chars: "\x1bb"                       }
+  - { key: D,  mods: Alt,           chars: "\x1bd"                       }
+
+  # (macOS) Command-N opens a new alacritty window
+  - { key: N,        mods: Command, command: { program: "open", args: ["-nb", "io.alacritty"] } }
+
+  # Broken ... inserts a space...
+  #- { key: R,  mods: Control,           chars: "\x12"                       }
+
+  # (macOS) Command-hjkl replaces arrows!
+  # Not needed if remapping is already done ina Karabiner.
+  #- { key: H,        mods: Command,     chars: "\x1b[D"                       }
+  #- { key: J,        mods: Command,     chars: "\x1b[B"                       }
+  #- { key: K,        mods: Command,     chars: "\x1b[A"                       }
+  #- { key: L,        mods: Command,     chars: "\x1b[C"                       }
+
+  # (macOS) Make CTRL-^ (toggle b/w buffers) work with CTRL-6
+  - { key: Key6,     mods: Control, chars: "\x1b[94;5u" }
+
 
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
