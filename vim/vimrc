@@ -411,6 +411,7 @@ augroup END
 augroup lexical
   autocmd!
   autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile call lexical#init()
+  autocmd FileType cpp,python,c,sh call lexical#init()
 augroup END
 
 highlight SpellBad ctermfg=darkred ctermbg=None
