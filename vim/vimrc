@@ -119,9 +119,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Rust
 " This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
 " Racer - code completion for Rust (used  for Rust go to definition)
-Plug 'racer-rust/vim-racer'
+"Plug 'racer-rust/vim-racer'
 
 "" vimgrep alternative
 "Plug 'EasyGrep'
@@ -190,6 +190,7 @@ colorscheme PaperColor
 filetype on
 filetype plugin on "when a file is edited its plugin file is loaded
 filetype plugin indent on    " required
+
 " Make comments italics
 highlight Comment cterm=italic ctermbg=NONE
 highlight Normal guibg=NONE ctermbg=232
@@ -410,17 +411,25 @@ highlight SpellBad ctermfg=darkred ctermbg=None
 autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
-"""""""" rust.vim format on save
-let g:rustfmt_autosave = 1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""" rust.vim format on save
+"    let g:rustfmt_autosave = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""" vim-racer
-au FileType rust nmap <C-]> <Plug>(rust-def)
-" Using ycmd for completion...
+"    au FileType rust nmap <C-]> <Plug>(rust-def)
+
+" disabled,  using ycmd for completion...
 "let g:racer_experimental_completer = 1
-let g:racer_insert_paren = 1
-" It's in $PATH already
+
+"    let g:racer_insert_paren = 1
+
+" disabled, it's in $PATH already
 "let g:racer_cmd = "~/bin/racer"
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""" vim-go specific config
 "" use gpls for GoDef, GoInfo
@@ -513,9 +522,13 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Need ccls
 au FileType cpp nmap <silent> <C-]> <Plug>(coc-definition)
 au FileType c nmap <silent> <C-]> <Plug>(coc-definition)
+" Need coc-python
 au FileType python nmap <silent> <C-]> <Plug>(coc-definition)
+" Need coc-rls
+au FileType rust nmap <silent> <C-]> <Plug>(coc-definition)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
