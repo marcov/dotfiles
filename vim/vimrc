@@ -50,10 +50,14 @@ set list
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
-"  The meaning of "list:longest,full" is so that when you do completion in the command line via tab, these events will happen:
-"  1. (on the first tab) a list of completions will be shown and the command will be completed to the longest common command.
-"  2. (on second tab) the wildmenu will show up with all the completions that were listed before.
-"  To test it out, type ":spe" and then hit tab once to see 1 and hit tab again to see 2.
+"  The meaning of "list:longest,full" is so that when you do completion in the
+"  command line via tab, these events will happen:
+"  1. (on the first tab) a list of completions will be shown and the command will
+"  be completed to the longest common command.
+"  2. (on second tab) the wildmenu will show up with all the completions that were
+"  listed before.
+"  To test it out, type ":spe" and then hit tab once to see 1 and hit tab again
+"  to see 2.
 
 set wildmenu
 set wildmode=list:longest,full
@@ -78,7 +82,6 @@ autocmd FileType
 
 autocmd FileType go set noexpandtab
 
-
 "autocmd FileType javascript autocmd BufWritePre <buffer> :call EsBeautifier()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,7 +103,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'lokaltog/vim-distinguished'
 Plug 'NLKNguyen/papercolor-theme'
 
-
 Plug 'walkermatt/vim-mapfile'
 
 " pug / jade HTML template files support
@@ -116,9 +118,9 @@ Plug 'vim-airline/vim-airline-themes'
 " ctrl+p to open a file => disabled in favor of fzf
 " Plug 'vim-scripts/ctrlp.vim'
 
-
 " Rust
-" This is a Vim plugin that provides Rust file detection, syntax highlighting, formatting, Syntastic integration, and more.
+" This is a Vim plugin that provides Rust file detection, syntax highlighting,
+" formatting, Syntastic integration, and more.
 "Plug 'rust-lang/rust.vim'
 " Racer - code completion for Rust (used  for Rust go to definition)
 "Plug 'racer-rust/vim-racer'
@@ -165,7 +167,6 @@ Plug 'junegunn/fzf.vim'
 " fzf (ctrl-p like) MRU functionality
 " Plug 'pbogut/fzf-mru.vim'
 
-
 "Plugin: es-beautifier manually loaded here, how to:
 " cd ~/.vim/bundle/
 " git clone git@github.com:dai-shi/es-beautifier.git
@@ -204,7 +205,6 @@ highlight CursorLine ctermbg=8 cterm=NONE
 
 " CursorLine transparent
 " highlight CursorLine cterm=underline gui=underline guibg=NONE ctermbg=NONE
-
 
 " Tweak colors for list chars
 highlight SpecialKey ctermfg=darkgrey
@@ -286,7 +286,6 @@ let g:airline#extensions#tabline#enabled = 1
 "     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
 "     \ 'file': '\v\.(exe|so|dll|o|a|P)$',
 "     \ }
-
 
 """" fzf options
 let g:fzf_buffers_jump = 1
@@ -382,7 +381,6 @@ let g:ack_autoclose = 1
 
 nnoremap <C-h> :let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
 
-
 """""""" Save buffer using :W, to avoid read-only failure
 "command! W w !sudo tee % > /dev/null
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -405,7 +403,6 @@ augroup osc_fix_highlight
   autocmd BufRead,BufNewFile _service setfiletype html
   autocmd BufRead,BufNewFile *.spec-template setfiletype spec
 augroup END
-
 
 """""""""  vim-lexical config
 augroup lexical
@@ -436,7 +433,6 @@ autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " disabled, it's in $PATH already
 "let g:racer_cmd = "~/bin/racer"
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
