@@ -220,6 +220,9 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 set colorcolumn=81
 highlight ColorColumn ctermbg=233
 
+" Search highlight
+highlight Search ctermfg=16 ctermbg=143
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" YCM options
 ""
