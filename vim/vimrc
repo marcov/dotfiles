@@ -173,6 +173,9 @@ Plug 'junegunn/fzf.vim'
 " npm install
 Plug '~/.vim/bundle/es-beautifier/contrib/vim'
 
+" Smooth scrolling when page up/down
+Plug 'psliwka/vim-smoothie'
+
 "All of your Plugins must be added before the following line
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
