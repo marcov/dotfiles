@@ -441,7 +441,7 @@ autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""" vim-go specific config
-"" use gpls for GoDef, GoInfo
+"" use gopls for GoDef, GoInfo
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
@@ -558,3 +558,11 @@ set updatetime=300
 hi CocHighlightText ctermbg=18
 autocmd CursorHold * call CocActionAsync('highlight')
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CHANGELOG
+" - enable coc.nvim
+" - use coc-python and ccls with coc
+" - disable YCM
+" - disable gutentags everywhere
+" - Map C-] for cpp / python
+" - installed coc-rls, disabled vim-racer and rust.vim
