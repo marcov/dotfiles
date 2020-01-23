@@ -210,12 +210,17 @@ highlight SpecialKey ctermfg=darkgrey
 "highlight StatusLine  term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
 "highlight StatusLineNC term=reverse ctermfg=231 ctermbg=238
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%120v.*/
+"" NOTE: **matchadd** only working in current window (i.e., no splits, etc...)
+highlight OverLength ctermbg=red ctermfg=white
+call matchadd('OverLength', '\%120v.*')
 
 " Show trailing whitespace
-highlight ExtraWhitespace ctermbg=darkred guibg=darkred
-match ExtraWhitespace /\s\+\%#\@<!$/
+highlight ExtraWhitespace ctermbg=darkred
+call matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
+
+" Match multiple empty lines, empty line after { or empty line before }
+highlight MultiEmptyLines ctermbg=darkred ctermfg=yellow cterm=underline
+call matchadd('MultiEmptyLines', '{\s*\n\s*\n\|^\s*\n\s*}\|^\s*\n\s*\n')
 
 " 80 chars column marker
 set colorcolumn=81
