@@ -366,13 +366,12 @@ let g:ack_autoclose = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""" Highlight the current word under cursor
-"nnoremap <leader>\ :<C-u>let @/ = expand('<cword>')<cr>
 "nnoremap <leader>\ :exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))<cr>
 "
 "Note, this is used to write in "/" register:
 " :let @/ = "foobar"
 
-nnoremap <C-h> :<C-u>let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
+nnoremap <C-h> :let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
 
 
 """""""" Save buffer using :W, to avoid read-only failure
