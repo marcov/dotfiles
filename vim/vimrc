@@ -255,9 +255,10 @@ let g:ycm_python_binary_path = "python3"
 "    let g:airline_symbols.readonly = ''
 "    let g:airline_symbols.maxlinenr = ''
 """""""""
-" Theme
-"let g:airline_theme='dark'
-let g:airline_theme='cool'
+" History of themes
+" 'dark'
+" 'cool'
+let g:airline_theme='distinguished'
 
 " Do not show branch (section B, see manual)
 let g:airline_section_b = ''
