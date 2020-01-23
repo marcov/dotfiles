@@ -110,7 +110,7 @@ export GOPATH=$HOME/go
 #export KEYTIMEOUT=1
 
 
-# zsh: prompt for all completion matches even when the typed text 
+# zsh: prompt for all completion matches even when the typed text
 # is a valid full match
 zstyle ':completion:*' accept-exact false
 
@@ -130,11 +130,12 @@ export KATA_DEV_MODE=true
 
 export EDITOR=vi
 
-export extraPath="${HOME}/bin:${GOPATH}/bin:$HOME/perl5/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
+export extraPath="${HOME}/bin:${GOPATH}/bin:$HOME/perl5/bin:$HOME/.cargo/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/go/bin"
 export PATH="${extraPath}:$PATH"
 
-# Rust 
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+# Rust
+command -v rustc &>/dev/null && export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
 export FZF_DEFAULT_OPTS="--reverse --bind tab:down --cycle"
 
 # Use 'ag' for FZF + extra ignores
