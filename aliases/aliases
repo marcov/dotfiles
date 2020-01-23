@@ -1,18 +1,35 @@
 #macOS-like clipboard copy/paste
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
+
+# sudo preserving env variables
 alias sudo="/usr/bin/sudo -E"
-alias ips="ip -c -br -4  -h a show"
+
+# pretty `ip address`
+alias ips="ip -c -br -4  -h address show"
+
+# make ag search in hidden files
 alias ag="ag --hidden --ignore-dir .git --ignore .tags"
 
-# Stolen from jlefrique :)
+# weather asciiart - stolen from jlefrique :)
 alias wtr='curl wttr.in'
 alias wtrnow='curl "wttr.in?0"'
 
-alias vi="TERM=screen-256color vi"
-alias cgdb="TERM=screen-256color cgdb"
+# decimal 2 hex
+alias d2h='__d2h(){ echo -n 0x; bc <<<"obase=16; ibase=10; ${1}"}; __d2h'
 
-# hex 2 decimal
-alias d2h='__d2h(){ bc <<<"obase=16; ibase=10; $1"}; __d2h'
-# decimal 2 hex (zsh style...)
-alias h2d='__h2d(){ bc <<<"obase=10; ibase=16; ${(U)1}"}; __h2d'
+# hex 2 decimal (zsh style...)
+alias h2d='__h2d(){ bc <<<"obase=10; ibase=16; ${${1/#0x/}:u}"}; __h2d'
+
+# list all the installed packages
+alias listpkgs='dpkg-query --show | tr  "\t" "_"'
+
+# show in what package provides a file / file path
+alias whatpkg='__findpkg(){ dpkg-query --search `command -v $1 || echo $1` | cut -d ":" -f 1 }; __findpkg'
+
+# cheatsheet (may consider using tldr too)
+alias cheat='__cheat(){ curl -fsSL "https://cheat.sh/$1" | less }; __cheat'
+
+# probably not needed anymore...
+#alias vi="TERM=screen-256color vi"
+#alias cgdb="TERM=screen-256color cgdb"
