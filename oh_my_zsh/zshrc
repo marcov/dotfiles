@@ -51,7 +51,7 @@ ZSH_THEME="flazz-mv"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages colorize docker git git-extras gnu-utils kubectl kube-ps1 sudo systemd rust cargo)
+plugins=(colored-man-pages colorize docker git git-extras gnu-utils kubectl kube-ps1 sudo systemd rust cargo fzf)
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -135,4 +135,18 @@ export PATH="${extraPath}:$PATH"
 
 # Rust 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export FZF_DEFAULT_OPTS="--reverse --bind tab:down --cycle"
+
+# Use 'ag' for FZF + extra ignores
+if command -v ag &>/dev/null; then
+    aliased="$(alias ag 2>/dev/null)"
+    [ -z "${aliased} " ] && aliased="ag='ag'"
+
+    # Extract alias command line
+    ag="$(sed -E "s,^.+='(.*)'$,\1," <<< ${aliased})"
+
+    extraIgnore=
+    #[ -n "$XXXX" ] && extraIgnore="-p ~/.extraignore"
+    export FZF_DEFAULT_COMMAND="$ag ${extraIgnore}"' -g  ""'
+fi
 
