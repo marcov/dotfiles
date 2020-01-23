@@ -1,6 +1,8 @@
 {
     "python.jediEnabled": false,
 
+    "coc.preferences.formatOnSaveFiletypes" : ["rust"],
+
     "languageserver": {
         "ccls": {
             "command": "ccls",
