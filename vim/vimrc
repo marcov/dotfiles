@@ -203,7 +203,7 @@ highlight CursorLine ctermbg=8 cterm=NONE
 
 
 " Tweak colors for list chars
-highlight SpecialKey guifg=darkgrey ctermfg=darkgrey
+highlight SpecialKey ctermfg=darkgrey
 
 " Colorize split bar
 "highlight StatusLine  term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
