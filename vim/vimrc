@@ -458,8 +458,10 @@ let g:go_info_mode='gopls'
 """""""" Tagbar
 nmap <F8> :TagbarToggle<CR>
 
-"""""""" Auto format
-autocmd Filetype python     autocmd BufWritePre <buffer> :Autoformat
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""" vim-autoformat
+"autocmd Filetype python     autocmd BufWritePre <buffer> :Autoformat
 
 """""""" custom mapping for text object motions
 map [[ ?{$<CR>w99[{:nohls<CR>
