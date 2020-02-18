@@ -21,14 +21,17 @@ alias d2h='__d2h(){ echo -n 0x; bc <<<"obase=16; ibase=10; ${1}"}; __d2h'
 # hex 2 decimal (zsh style...)
 alias h2d='__h2d(){ bc <<<"obase=10; ibase=16; ${${1/#0x/}:u}"}; __h2d'
 
+# cheatsheet (slow because it's curling, consider using `tldr` for offline mode)
+alias cheat='__cheat(){ curl -fsSL "https://cheat.sh/$1" | less }; __cheat'
+
 # list all the installed packages
-alias listpkgs='dpkg-query --show | tr  "\t" "_"'
+alias deblistpkgs='dpkg-query --show | tr  "\t" "_"'
 
 # show in what package provides a file / file path
-alias whatpkg='__findpkg(){ dpkg-query --search `command -v $1 || echo $1` | cut -d ":" -f 1 }; __findpkg'
+alias debwhatpkg='__findpkg(){ dpkg-query --search `command -v $1 || echo $1` | cut -d ":" -f 1 }; __findpkg'
 
-# cheatsheet (may consider using tldr too)
-alias cheat='__cheat(){ curl -fsSL "https://cheat.sh/$1" | less }; __cheat'
+# list the files of a package
+alias deblistfiles='dpkg-query --listfiles '
 
 # probably not needed anymore...
 #alias vi="TERM=screen-256color vi"
