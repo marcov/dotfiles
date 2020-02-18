@@ -340,7 +340,7 @@ set diffopt+=vertical
 "map <C-l> <C-W>l
 
 " Use jk sequence to exit insert mode
-inoremap jk <Esc>
+"inoremap jk <Esc>
 " You have 150ms to do that!
 
 """ Make navigation in quickfix window easier
@@ -360,6 +360,8 @@ nnoremap <leader>a :cclose<CR>
 
 """""""" relative lines numbers
 nnoremap  <C-q> :set rnu!<CR>
+
+"nnoremap <silent> <C-m> :call GoBackToRecentBuffer()<Enter>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""" ack.vim options
@@ -408,7 +410,7 @@ augroup END
 augroup lexical
   autocmd!
   autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile call lexical#init()
-  autocmd FileType cpp,python,c,sh call lexical#init()
+  autocmd FileType cpp,python,c,sh,make call lexical#init()
 augroup END
 
 highlight SpellBad ctermfg=darkred ctermbg=None
