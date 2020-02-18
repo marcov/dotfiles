@@ -33,6 +33,10 @@ alias debwhatpkg='__findpkg(){ dpkg-query --search `command -v $1 || echo $1` | 
 # list the files of a package
 alias deblistfiles='dpkg-query --listfiles '
 
+alias gitbranch='git rev-parse --abbrev-ref HEAD'
+
+#alias background='__background(){ start-stop-daemon --start -b --exec $1 }; __background'
+
 # probably not needed anymore...
 #alias vi="TERM=screen-256color vi"
 #alias cgdb="TERM=screen-256color cgdb"
