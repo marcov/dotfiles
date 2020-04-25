@@ -3,16 +3,9 @@
 colorscheme peachpuff
 " Set font
 set guifont=Liberation\ Mono\ 10
+
 " Maximize window size
 "set lines=999 columns=999
-"
-"
+
 " Nice color for cursolline
-"hi CursorLine   cterm=NONE ctermbg=darkgrey ctermfg=white guibg=darkgrey guifg=white
 hi CursorLine   cterm=NONE ctermbg=PaleGreen1 guibg=PaleGreen1
-
-
-
-
-
-
