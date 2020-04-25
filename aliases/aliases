@@ -6,7 +6,9 @@ alias pbpaste='xsel --clipboard --output'
 alias sudo="/usr/bin/sudo -E"
 
 # pretty `ip address`
-alias ips="ip -c -br -4  -h address show"
+alias ips="ip -c -br -4 -h address show"
+
+alias ips6="ip -c -br -6 -h address show"
 
 # make ag search in hidden files
 alias ag="ag --hidden --ignore-dir .git --ignore .tags"
@@ -14,6 +16,10 @@ alias ag="ag --hidden --ignore-dir .git --ignore .tags"
 # weather asciiart - stolen from jlefrique :)
 alias wtr='curl wttr.in'
 alias wtrnow='curl "wttr.in?0"'
+# fiobe weather
+alias fiobe_realtime='curl -s http://fiobbio.blogdns.net/realtime.json'
+alias rain='fiobe_realtime | jq .dailyRain -r'
+alias temp='fiobe_realtime | jq .outsideTemp -r'
 
 # decimal 2 hex
 alias d2h='__d2h(){ echo -n 0x; bc <<<"obase=16; ibase=10; ${1}"}; __d2h'
@@ -24,8 +30,10 @@ alias h2d='__h2d(){ bc <<<"obase=10; ibase=16; ${${1/#0x/}:u}"}; __h2d'
 # cheatsheet (slow because it's curling, consider using `tldr` for offline mode)
 alias cheat='__cheat(){ curl -fsSL "https://cheat.sh/$1" | less }; __cheat'
 
-# list all the installed packages
-alias deblistpkgs='dpkg-query --show | tr  "\t" "_"'
+# list all the installed packages, or packages removed but still with config files
+# lying around (dpkg -l shows "rc")
+# (NOTE: single quotes ' are escaped to have them work with alias...)
+alias deblistpkgs="dpkg-query --show --showformat='\${Package} \${Version}\n'"
 
 # show in what package provides a file / file path
 alias debwhatpkg='__findpkg(){ dpkg-query --search `command -v $1 || echo $1` | cut -d ":" -f 1 }; __findpkg'
@@ -33,10 +41,19 @@ alias debwhatpkg='__findpkg(){ dpkg-query --search `command -v $1 || echo $1` | 
 # list the files of a package
 alias deblistfiles='dpkg-query --listfiles '
 
+# show pkg info
+alias debinfo='__debinfo(){ apt-cache show $1 }; __debinfo'
+
 alias gitbranch='git rev-parse --abbrev-ref HEAD'
 
 #alias background='__background(){ start-stop-daemon --start -b --exec $1 }; __background'
 
-# probably not needed anymore...
+# Override TERM, in case weird artifacts are showing up with these applications
+
+# TERM set to "xterm-*" does NOT work with cgdb inside tmux, see:
+# https://github.com/tmux/tmux/wiki/FAQ
+#
+alias cgdb="TERM=screen-256color cgdb"
+
+# Same may be needed for vi depending on your terminal
 #alias vi="TERM=screen-256color vi"
-#alias cgdb="TERM=screen-256color cgdb"
