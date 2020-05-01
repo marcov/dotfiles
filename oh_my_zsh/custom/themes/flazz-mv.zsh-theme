@@ -6,11 +6,16 @@ then CARETCOLOR="${fg[red]}"
 else CARETCOLOR="$FG[111]"
 fi
 
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+# Don't show right prompt
+#local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-PROMPT='%m%{${fg_bold[magenta]}%}::%{$reset_color%}%{${fg[green]}%}%2~ $(git_prompt_info)%{${reset_color}%}%{$CARETCOLOR%}$ %{${reset_color}%}'
+# if there is at least a BG job, print the number of jobs ('%j'), else print nothing
+local show_bg_jobs="%(1j.[%j] .)"
 
-RPS1='$(vi_mode_prompt_info) ${return_code}'
+PROMPT='${show_bg_jobs}%m%{${fg_bold[magenta]}%}::%{$reset_color%}%{${fg[green]}%}%2~ $(git_prompt_info)%{${reset_color}%}%{$CARETCOLOR%}$ %{${reset_color}%}'
+
+# Don't show right prompt
+#RPS1='$(vi_mode_prompt_info) ${return_code}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[yellow]%}‹"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[yellow]%}›%{$reset_color%}"
