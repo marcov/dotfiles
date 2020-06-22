@@ -14,11 +14,6 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="flazz-mv"
 # macOS
 
-# if there is at least a BG job, print the number of jobs ('%j'), else print nothing
-local show_bg_jobs="%(1j.[%j] .)"
-
-PROMPT='${show_bg_jobs}$PROMPT'
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -73,6 +68,13 @@ plugins=(colored-man-pages colorize docker git git-extras gnu-utils kubectl kube
 # export TERM=tmux-256color
 
 source $ZSH/oh-my-zsh.sh
+
+## PROMPT customization (do it after sourcing oh_my_zsh...
+#
+# if there is at least a BG job, print the number of jobs ('%j'), else print nothing
+local show_bg_jobs="%(1j.[%j] .)"
+
+PROMPT='${show_bg_jobs}'"$PROMPT"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
