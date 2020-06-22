@@ -9,9 +9,6 @@ fi
 # Don't show right prompt
 #local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-# if there is at least a BG job, print the number of jobs ('%j'), else print nothing
-local show_bg_jobs="%(1j.[%j] .)"
-
 PROMPT='${show_bg_jobs}%m%{${fg_bold[magenta]}%}::%{$reset_color%}%{${fg[green]}%}%2~ $(git_prompt_info)%{${reset_color}%}%{$CARETCOLOR%}$ %{${reset_color}%}'
 
 # Don't show right prompt
