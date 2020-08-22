@@ -253,7 +253,7 @@ nnoremap  <C-q> :set rnu!<CR>
 
 "nnoremap <silent> <C-m> :call GoBackToRecentBuffer()<Enter>
 
-nnoremap  // :nohlsearch<CR>
+nnoremap <silent> // :nohlsearch<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 source ~/.vim/configs/ack.vim
@@ -452,6 +452,8 @@ source ~/.vim/configs/coc.vim
 
 source ~/.vim/configs/easymotion.vim
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 """""""""""" TEST for 24-bit colors
 " 24-bit color support
 "set termguicolors
@@ -463,14 +465,12 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CHANGELOG
-" - enable coc.nvim
-" - use coc-python and ccls with coc
-" - disable YCM
-" - disable gutentags everywhere
-" - Map C-] for cpp / python
-" - installed coc-rls, disabled vim-racer and rust.vim
-"
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NOTE: needs nvim commit 2ca8f02a6461fd4710c4ecc555fbe7ee9f75a70a
