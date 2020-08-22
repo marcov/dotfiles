@@ -11,7 +11,10 @@ alias ips="ip -c -br -4 -h address show"
 alias ips6="ip -c -br -6 -h address show"
 
 # make ag search in hidden files
-alias ag="ag --hidden --ignore-dir .git --ignore .tags"
+alias ag="ag --hidden --ignore-dir .git"
+
+# make fd search even in .gitignore file paths
+alias fd='fd --no-ignore'
 
 # weather asciiart - stolen from jlefrique :)
 alias wtr='curl wttr.in'
@@ -37,6 +40,7 @@ alias deblistpkgs="dpkg-query --show --showformat='\${Package} \${Version}\n'"
 
 # show in what package provides a file / file path
 alias debwhatpkg='__findpkg(){ dpkg-query --search `command -v $1 || echo $1` | cut -d ":" -f 1 }; __findpkg'
+alias dw='debwhatpkg'
 
 # list the files of a package
 alias deblistfiles='dpkg-query --listfiles '
