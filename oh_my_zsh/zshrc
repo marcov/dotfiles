@@ -112,6 +112,8 @@ unsetopt AUTO_CD
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 . ~/.aliases
 
+[ -f ~/.env-vars ] && . ~/.env-vars
+
 # do not prompt from man page on openSUSE
 export MAN_POSIXLY_CORRECT=
 # Make colored man pages work on openSUSE
