@@ -11,7 +11,7 @@ alias ips="ip -c -br -4 -h address show"
 alias ips6="ip -c -br -6 -h address show"
 
 # make ag search in hidden files
-alias ag="ag --hidden --ignore-dir .git"
+alias ag="ag --hidden --ignore-dir .git --ignore .tags"
 
 # make fd search even in .gitignore file paths
 alias fd='fd --no-ignore'
