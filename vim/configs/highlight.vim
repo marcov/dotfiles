@@ -57,17 +57,17 @@ highlight ColorColumn ctermbg=235
 """""" Colorize custom text patterns by using matchadd
 "
 "" NOTE: **matchadd** only working in current window (i.e., no splits, etc...)
-highlight OverLength cterm=undercurl
-call matchadd('OverLength', '\%120v.*')
+highlight LinesTooLong cterm=undercurl
+call matchadd('LinesTooLong', '\%120v.*')
 
 " Show trailing whitespace
-highlight ExtraWhitespace ctermbg=darkred
-call matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
+highlight TrailingWhiteSpaces ctermbg=52
+call matchadd('TrailingWhiteSpaces', '\s\+\%#\@<!$')
 
 " Match multiple empty lines, empty line after { or empty line before }
 "" History:
 " v1: highlight MultiEmptyLines ctermbg=darkred ctermfg=yellow cterm=underline
-highlight MultiEmptyLines ctermbg=none cterm=bold,strikethrough,underline ctermfg=darkred
+highlight MultiEmptyLines ctermbg=none cterm=bold,strikethrough,underline ctermfg=196
 call matchadd('MultiEmptyLines', '{\s*\n\s*\n\|^\s*\n\s*}\|^\s*\n\s*\n')
 
 highlight SpellBad ctermfg=darkred ctermbg=None
