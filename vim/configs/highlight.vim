@@ -1,5 +1,13 @@
-""""""""""""""""""""""""""""""" COLORS """""""""""""""""""""""""""""""""""""""""
-set t_Co=256
+""""""""""""""""""""""""""""""" HIGHLIGHT """"""""""""""""""""""""""""""""""""""
+"
+" NOTE: use
+" - :highlight to show all highlighting configs
+" - :so $VIMRUNTIME/syntax/hitest.vim to see all the highlight groups
+"
+
+" This should not be needed:
+"set t_Co=256
+
 syntax on
 
 " Colorscheme changelog:
@@ -31,10 +39,12 @@ highlight Comment cterm=italic ctermbg=none
 " History:
 " v2: ctermbg=234 cterm=none
 " v1: cterm=underline gui=underline
+" enable with :set cursorline
 highlight CursorLine ctermbg=8 cterm=none
 
 " Cursor colum number
-highlight CursorColumn ctermbg=233
+" enable with :set cursorcolumn
+highlight CursorColumn ctermbg=8 cterm=none
 
 " Cursor line number
 highlight CursorLineNr ctermbg=24 ctermfg=220 cterm=bold
@@ -48,7 +58,6 @@ highlight SpecialKey ctermfg=darkgrey
 " v1: ctermbg=233
 set colorcolumn=81
 highlight ColorColumn ctermbg=235
-
 
 " Colorize split bar
 "highlight StatusLine  term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
@@ -81,9 +90,7 @@ highlight SpellBad ctermfg=darkred ctermbg=None
 highlight Search ctermfg=16 ctermbg=229 cterm=none
 highlight IncSearch ctermfg=16 ctermbg=117 cterm=none
 
-
-" TODO!
-" This is e.g. the warning message shown when the search wraps
+" This is the warning message shown when the search wraps
 highlight WarningMsg ctermfg=yellow cterm=bold ctermbg=237
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -99,3 +106,7 @@ highlight DiffText ctermfg=yellow ctermbg=30 cterm=italic,bold
 highlight DiffAdd ctermfg=252 ctermbg=22 cterm=bold
 highlight DiffDelete ctermfg=232 ctermbg=232
 highlight Folded ctermfg=11 ctermbg=236
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" markdown italic should be shown as italic
+highlight markdownItalic cterm=italic

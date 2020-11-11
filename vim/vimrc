@@ -1,8 +1,13 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " NOTE:
-"  - you can reload the vim configuration on-the-fly with :so %
-"  - use ':high' to show all highlighting combinations
+" - Reload the vim configuration on-the-fly with :so %
+"
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Core configuration, no plugins dependent
+"
 set nocompatible                " must be first line
 set background=dark
 
@@ -22,9 +27,9 @@ set showmatch                   " show matching brackets/parenthesis
 set incsearch                   " find as you type search
 set hlsearch                    " highlight search terms
 
-" Case sensitive when an upppercase letter is present
-:set ignorecase
-:set smartcase
+" Case sensitive when an uppercase letter is present
+set ignorecase
+set smartcase
 
 set smartindent                 " for indentation
 set shiftwidth=4                " use indents of 4 spaces
@@ -38,7 +43,7 @@ set hidden                      " A buffer becomes hidden when it is abandoned
 
 set mouse=a                     " Enable mouse scroll wheel
 
-set signcolumn=yes              "Always show signcolumn
+set signcolumn=yes              "Display the signcolumn (leftmost column with gutters & errs...)
 
 "Show hidden characters
 " set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
@@ -51,15 +56,10 @@ set list
 " I.e.: "Search hit BOTTOM, continuing at TOP"
 set shortmess+=S
 
-" italic font support
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
-
-""""""""" Alternate screen (when backgrounding vim)
+"" Alternate screen (when backgrounding vim)
 " set t_ti= t_te=
 
 "set previewwindow
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the
@@ -76,7 +76,7 @@ set wildmode=list:longest,full
 "Always show a bottom status line
 set laststatus=2
 
-" Keep cursor centered vertically
+" Padding lines b/w cursor line and top / bottom of the window
 set scrolloff=5
 
 " Make switching back to Normal mode (using ESC) fast.
@@ -91,21 +91,26 @@ set ttimeoutlen=50
 " - / => search
 " - // => nohlsearch
 " 'timeoutlen': Time in milliseconds to wait for a mapped sequence to complete.
-set timeoutlen=200
+set timeoutlen=250
 
 " Do not delete % when joining lines starting with %
 set formatoptions-=j
 
 set diffopt+=vertical
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" TAGS
-"set tags=<path/to/1/tags>,<path/to/2/tags>,...
-setlocal tags+=.tags,/home/marco/dev/system-tags
+"" Global tags
+set tags+=tags,.tags,/home/marco/dev/system-tags
+
+"" Leader key
+let mapleader="'"
+
+" netrw show tree mode
+let g:netrw_liststyle = 3
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Plug plugins manager
-""
+"
+" Plug plugins manager
+"
 call plug#begin('~/.vim/plugged')
 
 " semantic code completion for C
@@ -207,9 +212,19 @@ Plug 'wellle/context.vim'
 " easy motion
 Plug 'easymotion/vim-easymotion'
 
+" C/C++ code highlighting using coc + ccls
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+" async grepping
+"Plug 'wsdjeg/FlyGrep.vim'
+
 "All of your Plugins must be added before the following line
 call plug#end()
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Configs
+"
 
 source ~/.vim/configs/highlight.vim
 
@@ -217,20 +232,22 @@ source ~/.vim/configs/ycm.vim
 
 source ~/.vim/configs/airline.vim
 
-"""" ctrlp options => DISABLED in favor of FZF
-" source ~/.vim/configs/ctrlp.vim
-"
 source ~/.vim/configs/fzf.vim
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FIXME
-set wildignore+=**/Source/**/Windows/**,**/Source/**/Mac/**
-set wildignore+=**/Test/**/Windows/**,**/Test/**/Mac/**
-set wildignore+=**/Modules/**/Windows/**,**/Modules/**/Mac/**
+source ~/.vim/configs/ack.vim
+
+source ~/.vim/configs/tagbar.vim
+
+source ~/.vim/configs/gutentags.vim
+
+source ~/.vim/configs/context.vim
+
+source ~/.vim/configs/easymotion.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"==================== Mappings =========================
+"
+" Mappings
+" NOTE: some of the mappings are defined in the configs/*.vim files
 "
 
 " Use jk sequence to exit insert mode
@@ -248,38 +265,38 @@ nnoremap <C-k> :bprevious<CR>
 """ Close buffer
 nnoremap <leader>c :bdelete<CR>
 
-"""""""" relative lines numbers
-nnoremap  <C-q> :set rnu!<CR>
+""" Move to next window
+nnoremap <Leader>w <C-w>w
+
+""" yank to clipboard
+nnoremap <leader>y "+y
+
+" relative lines numbers
+" nnoremap  <C-q> :set rnu!<CR>
 
 "nnoremap <silent> <C-m> :call GoBackToRecentBuffer()<Enter>
 
-nnoremap <silent> // :nohlsearch<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle highlight
+let hlstate=0
+nnoremap <silent> // :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR>
 
-source ~/.vim/configs/ack.vim
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""" Highlight the current word under cursor
-"nnoremap <leader>\ :exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))<cr>
+" Highlight the current word under cursor
 "
-"Note, this is used to write in "/" register:
-" :let @/ = "foobar"
+" NOTES:
+"
+" - `"/' is the last search pattern register
+"
+" - `let @/ =' is used to write in the "/" register, e.g. ` :let @/ = "foobar"'
+"
+nnoremap <C-h> :let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<CR> :let &hlsearch = &hlsearch<CR>
 
-nnoremap <C-h> :let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
-
-"""""""" Save buffer using :W, to avoid read-only failure
+" sudo save buffer with :W
 " NOTE: the '!' is used to replace the command if it already exist (e.g. when
 " re-sourcing this  config)
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""" netrw show tree mode
-let g:netrw_liststyle = 3
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" auto file type specific here
+" OSC filetype highlight
 "
 augroup osc_fix_highlight
   " Set the filetype based on the file's extension, but only if
@@ -291,10 +308,10 @@ augroup END
 """""""""  vim-lexical config
 "augroup lexical
 "  autocmd!
-"  autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile,cpp,python,c,sh,make,xml call lexical#init()
+"  autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile,cpp,python,c,sh,make,fcs,xml call lexical#init()
 "augroup END
 
-""""""""" override euristic indentation for this files...
+""""""""" override heuristic indentation for this files...
 autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
@@ -342,23 +359,6 @@ let g:go_info_mode='gopls'
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-"""""""" Tagbar
-nmap <F8> :TagbarToggle<CR>
-
-" FIX for: https://github.com/majutsushi/tagbar/issues/574
-let g:tagbar_iconchars = ['▶', '▼']
-
-let g:tagbar_left = 1
-
-let g:tagbar_compact = 1
-
-"autocmd VimEnter * nested :call tagbar#autoopen(1)
-"autocmd VimEnter * nested :TagbarOpen
-"autocmd FileType c,cpp nested :TagbarOpen
-autocmd FileType * nested :call tagbar#autoopen(0)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 """""""" vim-autoformat
 "autocmd Filetype python     autocmd BufWritePre <buffer> :Autoformat
 
@@ -373,7 +373,7 @@ autocmd FileType * nested :call tagbar#autoopen(0)
 "map [[ ?[ )\t]{$<CR>w99[{:nohls<CR>
 "
 " Alternatively, this function support both cases...
-function! GoToBeingOfCFx()
+function! GotoStartOfFunction()
     " search() options:
     "  - b = search back
     "  - W = do not wrap
@@ -384,49 +384,19 @@ function! GoToBeingOfCFx()
         return
     endif
 
-    " Search for '{' preceeded by ' )\t'
+    " Search for '{' preceded by ' )\t'
     if search('[ )\t]{$', 'bWe') != 0
         execute "normal w99[{"
     endif
 endfunction
 
-function! TestFloating()
-    let buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(buf, 0, -1, v:true, ["test", "text"])
-    let opts = {'relative' : 'window', 'width': 100, 'height': 100, 'col': 0,
-        \ 'row': 1, 'anchor': 'NW', 'style': 'minimal'}
-    let win = nvim_open_win(buf, 0, opts)
-    " optional: change highlight, otherwise Pmenu is used
-    call nvim_win_set_option(win, 'winhl', 'Normal:MyHighlight')
-endfunction
-
-function! CreateCenteredFloatingWindow()
-    let width = float2nr(&columns * 0.6)
-    let height = float2nr(&lines * 0.6)
-    let top = ((&lines - height) / 2) - 1
-    let left = (&columns - width) / 2
-    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
-
-    let top = "╭" . repeat("─", width - 2) . "╮"
-    let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
-    let lines = [top] + repeat([mid], height - 2) + [bot]
-    let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-    call nvim_open_win(s:buf, v:true, opts)
-endfunction
-
-map <silent> [[ :call GoToBeingOfCFx()<CR>
+map <silent> [[ :call GotoStartOfFunction()<CR>
 
 map ][ /^}$<CR>b99]}:nohls<CR>
 
 map ]] j0[[%/{$<CR>_:nohls<CR>
 
 map [] k$][%?^}$<CR>:nohls<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-source ~/.vim/configs/gutentags.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "fugitive
@@ -446,11 +416,9 @@ nmap <silent> mm :Man<Enter>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-source ~/.vim/configs/context.vim
-
 source ~/.vim/configs/coc.vim
 
-source ~/.vim/configs/easymotion.vim
+source ~/.vim/configs/vim-lsp-cxx-highlight.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -466,6 +434,7 @@ let &t_Ce = "\e[4:0m"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap for do codeAction of selected region
+"
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
@@ -494,3 +463,31 @@ function pd()
   return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
 end
 EOF
+" TESTS
+
+function! TestFloating()
+    let buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(buf, 0, -1, v:true, ["test", "text"])
+    let opts = {'relative' : 'window', 'width': 100, 'height': 100, 'col': 0,
+        \ 'row': 1, 'anchor': 'NW', 'style': 'minimal'}
+    let win = nvim_open_win(buf, 0, opts)
+    " optional: change highlight, otherwise Pmenu is used
+    call nvim_win_set_option(win, 'winhl', 'Normal:MyHighlight')
+endfunction
+
+function! CreateCenteredFloatingWindow()
+    let width = float2nr(&columns * 0.6)
+    let height = float2nr(&lines * 0.6)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+endfunction
+

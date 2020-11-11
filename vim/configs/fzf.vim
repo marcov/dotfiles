@@ -4,6 +4,7 @@ nnoremap  <C-p> :FZF<CR>
 "nnoremap  <C-l> :FZFMru<CR>
 nnoremap  <C-l> :History<CR>
 nnoremap  <C-t> :Tags<CR>
+nnoremap  <C-g> :Ag<CR>
 
 " Use neovim floating window for fzf
 if has('nvim')
