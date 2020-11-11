@@ -11,7 +11,13 @@ alias ips="ip -c -br -4 -h address show"
 alias ips6="ip -c -br -6 -h address show"
 
 # make ag search in hidden files
-alias ag="ag --hidden --ignore-dir .git --ignore .tags"
+# Ignore the .git folder
+# Ignore files named .tags
+# Use for extra ignores the `.ignore' file in the CWD
+alias ag="ag --hidden --ignore-dir .git --ignore .tags --path-to-ignore .ignore"
+
+# make fd search even in .gitignore file paths
+alias fd='fd --no-ignore'
 
 # weather asciiart - stolen from jlefrique :)
 alias wtr='curl wttr.in'
@@ -55,6 +61,7 @@ alias gb='git rev-parse --abbrev-ref HEAD'
 # https://github.com/tmux/tmux/wiki/FAQ
 #
 alias cgdb="TERM=screen-256color cgdb"
+alias gdb="TERM=screen-256color gdb"
 
 # Same may be needed for vi depending on your terminal
 #alias vi="TERM=screen-256color vi"

@@ -1,8 +1,13 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " NOTE:
-"  - you can reload the vim configuration on-the-fly with :so %
-"  - use ':high' to show all highlighting combinations
+" - Reload the vim configuration on-the-fly with :so %
+"
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Core configuration, no plugins dependent
+"
 set nocompatible                " must be first line
 set background=dark
 
@@ -15,14 +20,16 @@ endif
 " highlight current line
 set cursorline
 
-set backspace=indent,eol,start  " backspace for dummys
+set backspace=indent,eol,start  " backspace for dummies
 set linespace=0                 " No extra spaces between rows
 set number                      " Line numbers on
 set showmatch                   " show matching brackets/parenthesis
 set incsearch                   " find as you type search
 set hlsearch                    " highlight search terms
 
-set smartcase                   " case sensitive when uc present
+" Case sensitive when an uppercase letter is present
+set ignorecase
+set smartcase
 
 set smartindent                 " for indentation
 set shiftwidth=4                " use indents of 4 spaces
@@ -36,18 +43,23 @@ set hidden                      " A buffer becomes hidden when it is abandoned
 
 set mouse=a                     " Enable mouse scroll wheel
 
-set signcolumn=yes              "Always show signcolumn
+set signcolumn=yes              "Display the signcolumn (leftmost column with gutters & errs...)
 
 "Show hidden characters
-"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-"set listchars=tab:>-,trail:-
-set listchars=tab:»·
+" set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+" set listchars=tab:>-,trail:-
+" set listchars=tab:»·
+set listchars=tab:··
 set list
 
-"set termguicolors
+" Make the Search Wrap message EXPLICIT Again!
+" I.e.: "Search hit BOTTOM, continuing at TOP"
+set shortmess+=S
+
+"" Alternate screen (when backgrounding vim)
+" set t_ti= t_te=
 
 "set previewwindow
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "  "set wildmenu" enables a menu at the bottom of the vim/gvim window.
 "  The meaning of "list:longest,full" is so that when you do completion in the
@@ -58,39 +70,47 @@ set list
 "  listed before.
 "  To test it out, type ":spe" and then hit tab once to see 1 and hit tab again
 "  to see 2.
-
 set wildmenu
 set wildmode=list:longest,full
 
 "Always show a bottom status line
 set laststatus=2
 
-" Keep cursor centered vertically
+" Padding lines b/w cursor line and top / bottom of the window
 set scrolloff=5
 
-" Make switching back to Normal mode (w/ ESC) fast.
+" Make switching back to Normal mode (using ESC) fast.
+" 'ttimeoutlen': time in ms to wait for a key code sequence to complete
+"
 set ttimeoutlen=50
 
+" Make the timeout to disambiguate b/w a start of a command and a mapped
+" sequence shorter.
+" E.g. after pressin '/' once, I don't want to wait the default timeout of 1s
+" before doing a search
+" - / => search
+" - // => nohlsearch
+" 'timeoutlen': Time in milliseconds to wait for a mapped sequence to complete.
+set timeoutlen=250
+
+" Do not delete % when joining lines starting with %
+set formatoptions-=j
+
+set diffopt+=vertical
+
+"" Global tags
+set tags+=tags,.tags,/home/marco/dev/system-tags
+
+"" Leader key
+let mapleader="'"
+
+" netrw show tree mode
+let g:netrw_liststyle = 3
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Language Specific here
-
-" Remove trailing spaces automatically before when saving, for specific file
-" formats:
-autocmd FileType
-    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml,rust,python,vim,xml,gitcommit,make
-    \ autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-autocmd FileType go set noexpandtab
-
-"autocmd FileType javascript autocmd BufWritePre <buffer> :call EsBeautifier()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" TAGS
-"set tags=<path/to/1/tags>,<path/to/2/tags>,...
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Plug plugins manager
-""
+"
+" Plug plugins manager
+"
 call plug#begin('~/.vim/plugged')
 
 " semantic code completion for C
@@ -99,11 +119,10 @@ call plug#begin('~/.vim/plugged')
 " Verilog syntax highlight
 "Plug 'systemverilog.vim'
 
-" colorscheme
+" colorschemes
 Plug 'lokaltog/vim-distinguished'
-Plug 'NLKNguyen/papercolor-theme'
 
-Plug 'walkermatt/vim-mapfile'
+Plug 'NLKNguyen/papercolor-theme'
 
 " pug / jade HTML template files support
 Plug 'digitaltoad/vim-pug'
@@ -113,6 +132,7 @@ Plug 'fatih/vim-go'
 
 " status line
 Plug 'vim-airline/vim-airline'
+
 Plug 'vim-airline/vim-airline-themes'
 
 " ctrl+p to open a file => disabled in favor of fzf
@@ -130,9 +150,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " use ack for file search
 Plug 'mileszs/ack.vim'
-
-" git
-Plug 'vim-scripts/fugitive.vim'
 
 " Heuristically set buffer options
 "Plug 'tpope/vim-sleuth'
@@ -152,8 +169,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " External syntax checker (used by rust.vim)
 "Plug 'Syntastic'
 
-"Browse tags for current file (used by rust.vim)
-Plug 'vim-scripts/Tagbar'
+"Show list of tags in a side bar (also used by rust.vim)
+Plug 'majutsushi/tagbar'
 
 " Auto format
 Plug 'Chiel92/vim-autoformat'
@@ -177,167 +194,61 @@ Plug '~/.vim/bundle/es-beautifier/contrib/vim'
 " Smooth scrolling when page up/down
 Plug 'psliwka/vim-smoothie'
 
+" Git
+Plug 'vim-scripts/fugitive.vim'
+
+" Show Git diff in the gutter (leftmost column)
+Plug 'airblade/vim-gitgutter'
+
+" Quickly show commit messages
+Plug 'rhysd/git-messenger.vim'
+
+" Show the context of the current line (class, function, ...)
+Plug 'wellle/context.vim'
+
+" vimwiki: can be used to render some wiki / markdown documents better
+"Plug 'vimwiki/vimwiki'
+
+" easy motion
+Plug 'easymotion/vim-easymotion'
+
+" C/C++ code highlighting using coc + ccls
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+" async grepping
+"Plug 'wsdjeg/FlyGrep.vim'
+
 "All of your Plugins must be added before the following line
 call plug#end()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""" COLORS """""""""""""""""""""""""""""""""""""""""
-set t_Co=256
-syntax on
-
-" Colorscheme changelog:
-" - distinguished
-" - desert
-" - PaperColor
-" - minimalist
-colorscheme PaperColor
-filetype on
-filetype plugin on "when a file is edited its plugin file is loaded
-filetype plugin indent on    " required
-
-" Make comments italics
-highlight Comment cterm=italic ctermbg=NONE
-highlight Normal guibg=NONE ctermbg=232
-
-" CursorLine match with BG
-"highlight CursorLine ctermbg=234 cterm=NONE
-highlight CursorLine ctermbg=8 cterm=NONE
-
-" CursorLine transparent
-" highlight CursorLine cterm=underline gui=underline guibg=NONE ctermbg=NONE
-
-" Tweak colors for list chars
-highlight SpecialKey ctermfg=darkgrey
-
-" Colorize split bar
-"highlight StatusLine  term=reverse cterm=bold ctermfg=231 ctermbg=31 gui=bold guifg=#ffffff guibg=#0087af guisp=Blue
-"highlight StatusLineNC term=reverse ctermfg=231 ctermbg=238
-
-"" NOTE: **matchadd** only working in current window (i.e., no splits, etc...)
-highlight OverLength ctermbg=red ctermfg=white
-call matchadd('OverLength', '\%120v.*')
-
-" Show trailing whitespace
-highlight ExtraWhitespace ctermbg=darkred
-call matchadd('ExtraWhitespace', '\s\+\%#\@<!$')
-
-" Match multiple empty lines, empty line after { or empty line before }
-highlight MultiEmptyLines ctermbg=darkred ctermfg=yellow cterm=underline
-call matchadd('MultiEmptyLines', '{\s*\n\s*\n\|^\s*\n\s*}\|^\s*\n\s*\n')
-
-" 80 chars column marker
-set colorcolumn=81
-highlight ColorColumn ctermbg=233
-
-" Search highlight
-highlight Search ctermfg=16 ctermbg=143
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" YCM options
-""
-"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_python_binary_path = "python3"
-"au FileType python nmap <C-]> :YcmCompleter GoToDefinition<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" airline options
-
-""""""" Unicode symbols: NOT NEEDED if "g:airline_powerline_fonts = 1"
-"    if !exists('g:airline_symbols')
-"     let g:airline_symbols = {}
-"    endif
-"    let g:airline_symbols.linenr = ''
-"    let g:airline_symbols.crypt = ''
-"    let g:airline_symbols.paste = 'ρ'
-"    let g:airline_symbols.spell = 'Ꞩ'
-"    "let g:airline_symbols.spell = 'X'
-"    let g:airline_symbols.notexists = '∄'
-"    let g:airline_symbols.whitespace = 'Ξ'
-"    let g:airline_left_sep = ''
-"    let g:airline_left_alt_sep = ''
-"    let g:airline_right_sep = ''
-"    let g:airline_right_alt_sep = ''
-"    let g:airline_symbols.branch = ''
-"    let g:airline_symbols.readonly = ''
-"    let g:airline_symbols.maxlinenr = ''
-"""""""""
-" History of themes
-" 'dark'
-" 'cool'
-let g:airline_theme='distinguished'
-
-" Do not show branch (section B, see manual)
-let g:airline_section_b = ''
-
-let g:airline_powerline_fonts = 1
-
-" tabline shows the list of buffers on top
-let g:airline#extensions#tabline#enabled = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""" ctrlp options => disabled in favor of FZF
-"    nnoremap  <C-l> :CtrlPMRUFiles<CR>
 "
-"   let g:ctrlp_custom_ignore = {
-"     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"     \ 'file': '\v\.(exe|so|dll|o|a|P)$',
-"     \ }
-
-"""" fzf options
-let g:fzf_buffers_jump = 1
-nnoremap  <C-p> :FZF<CR>
-"nnoremap  <C-l> :FZFMru<CR>
-nnoremap  <C-l> :History<CR>
-
-" Use neovim floating window for fzf
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-
-  function! FloatingFZF()
-    let height = &lines
-    let width = float2nr(&columns - (&columns * 2 / 10))
-    let col = float2nr((&columns - width) / 2)
-    let col_offset = &columns / 10
-    let opts = {
-          \ 'relative': 'editor',
-          \ 'row': height * 2 / 3,
-          \ 'col': col + col_offset,
-          \ 'width': width * 2 / 1,
-          \ 'height': height / 3,
-          \ 'style': 'minimal'
-          \ }
-    let buf = nvim_create_buf(v:false, v:true)
-    let win = nvim_open_win(buf, v:true, opts)
-    call setwinvar(win, '&winhl', 'NormalFloat:TabLine')
-  endfunction
-
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-  highlight TabLine ctermbg=234
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Do not delete % when joining lines starting with %
-set formatoptions-=j
-
-set diffopt+=vertical
-
-"==================== Mappings =========================
+" Configs
 "
-" Better split switching
-"map <C-j> <C-W>j
-"map <C-k> <C-W>k
-"map <C-h> <C-W>h
-"map <C-l> <C-W>l
+
+source ~/.vim/configs/highlight.vim
+
+source ~/.vim/configs/ycm.vim
+
+source ~/.vim/configs/airline.vim
+
+source ~/.vim/configs/fzf.vim
+
+source ~/.vim/configs/ack.vim
+
+source ~/.vim/configs/tagbar.vim
+
+source ~/.vim/configs/gutentags.vim
+
+source ~/.vim/configs/context.vim
+
+source ~/.vim/configs/easymotion.vim
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Mappings
+" NOTE: some of the mappings are defined in the configs/*.vim files
+"
 
 " Use jk sequence to exit insert mode
 "inoremap jk <Esc>
@@ -351,54 +262,42 @@ set diffopt+=vertical
 nnoremap <C-j> :bnext<CR>
 nnoremap <C-k> :bprevious<CR>
 
-""" Tabs navigation
-nnoremap <leader>n :tabnext<CR>
-nnoremap <leader>p :tabprevious<CR>
+""" Close buffer
+nnoremap <leader>c :bdelete<CR>
 
-""" closing quickfix window
-nnoremap <leader>a :cclose<CR>
+""" Move to next window
+nnoremap <Leader>w <C-w>w
 
-"""""""" relative lines numbers
-nnoremap  <C-q> :set rnu!<CR>
+""" yank to clipboard
+nnoremap <leader>y "+y
+
+" relative lines numbers
+" nnoremap  <C-q> :set rnu!<CR>
 
 "nnoremap <silent> <C-m> :call GoBackToRecentBuffer()<Enter>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""" ack.vim options
-cnoreabbrev Ack Ack!
-nnoremap <Leader>f :Ack!<Space>
+" Toggle highlight
+let hlstate=0
+nnoremap <silent> // :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<CR>
 
-let g:ackprg = "ag"
-let g:ack_default_options = " --case-sensitive --noheading --nopager --nocolor --nogroup --column --ignore .tags --hidden --ignore-dir .git"
-let g:ackhighlight = 1
-let g:ack_autoclose = 1
-"let g:ack_autofold_results = 1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""" Highlight the current word under cursor
-"nnoremap <leader>\ :exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))<cr>
+" Highlight the current word under cursor
 "
-"Note, this is used to write in "/" register:
-" :let @/ = "foobar"
+" NOTES:
+"
+" - `"/' is the last search pattern register
+"
+" - `let @/ =' is used to write in the "/" register, e.g. ` :let @/ = "foobar"'
+"
+nnoremap <C-h> :let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<CR> :let &hlsearch = &hlsearch<CR>
 
-nnoremap <C-h> :let @/ = printf("\\<%s\\>", escape(expand('<cword>'), '/\'))<cr>:let &hlsearch = &hlsearch<cr>
-
-"""""""" Save buffer using :W, to avoid read-only failure
-"command! W w !sudo tee % > /dev/null
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+" sudo save buffer with :W
+" NOTE: the '!' is used to replace the command if it already exist (e.g. when
+" re-sourcing this  config)
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""" netrw show tree mode
-let g:netrw_liststyle = 3
-
-"""""""""" italic font support
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
-
-""""""""" Alternate screen (when backgrounding vim)
-"set t_ti= t_te=
-
+" OSC filetype highlight
+"
 augroup osc_fix_highlight
   " Set the filetype based on the file's extension, but only if
   " 'filetype' has not already been set
@@ -407,17 +306,24 @@ augroup osc_fix_highlight
 augroup END
 
 """""""""  vim-lexical config
-augroup lexical
-  autocmd!
-  autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile call lexical#init()
-  autocmd FileType cpp,python,c,sh,make call lexical#init()
-augroup END
+"augroup lexical
+"  autocmd!
+"  autocmd FileType text,markdown,mkd,git,*commit*,*COMMIT*,textile,cpp,python,c,sh,make,fcs,xml call lexical#init()
+"augroup END
 
-highlight SpellBad ctermfg=darkred ctermbg=None
-
-""""""""" override euristic indentation for this files...
+""""""""" override heuristic indentation for this files...
 autocmd Filetype javascript,pug,html,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+" Remove trailing spaces automatically before when saving, for specific file
+" formats:
+autocmd FileType
+    \ c,cpp,java,php,javascript,pug,arduino,make,html,sh,css,go,perl,markdown,spec,yaml,rust,python,vim,xml,gitcommit,make,json
+    \ autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+autocmd FileType go set noexpandtab
+
+"autocmd FileType javascript autocmd BufWritePre <buffer> :call EsBeautifier()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -428,7 +334,7 @@ autocmd Filetype sh setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 """""""" vim-racer
 "    au FileType rust nmap <C-]> <Plug>(rust-def)
 
-" disabled,  using ycmd for completion...
+" disabled, using ycmd for completion...
 "let g:racer_experimental_completer = 1
 
 "    let g:racer_insert_paren = 1
@@ -453,116 +359,135 @@ let g:go_info_mode='gopls'
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-"""""""" Tagbar
-nmap <F8> :TagbarToggle<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 """""""" vim-autoformat
 "autocmd Filetype python     autocmd BufWritePre <buffer> :Autoformat
 
-"""""""" custom mapping for text object motions
-map [[ ?{$<CR>w99[{:nohls<CR>
+"""""""" custom mapping for text object motions, when '{' and '}' are not in
+" the first column
+"
+" Explanation:
+" - Search bad for the regext `[ )\t]{$`
+" - go to the next word
+" - go to 99 count to the previous unmatched '{'.
+" - no highlight search
+"map [[ ?[ )\t]{$<CR>w99[{:nohls<CR>
+"
+" Alternatively, this function support both cases...
+function! GotoStartOfFunction()
+    " search() options:
+    "  - b = search back
+    "  - W = do not wrap
+    "  - e = end of match
+
+    " Search for '{' on the first column
+    if search('^{$', 'bW') != 0
+        return
+    endif
+
+    " Search for '{' preceded by ' )\t'
+    if search('[ )\t]{$', 'bWe') != 0
+        execute "normal w99[{"
+    endif
+endfunction
+
+map <silent> [[ :call GotoStartOfFunction()<CR>
+
 map ][ /^}$<CR>b99]}:nohls<CR>
-map ]] j0[[%/{$<CR>0:nohls<CR>
+
+map ]] j0[[%/{$<CR>_:nohls<CR>
+
 map [] k$][%?^}$<CR>:nohls<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""" vim-gutentags
-function! GutentagsFilter(path) abort
-    if fnamemodify(a:path, ':e') == 'cpp'
-      " Using coc-nvim
-      return 0
-    elseif fnamemodify(a:path, ':e') == 'hpp'
-      " Using coc-nvim
-      return 0
-    elseif fnamemodify(a:path, ':e') == 'c'
-      " Using coc-nvim
-      return 0
-    elseif fnamemodify(a:path, ':e') == 'h'
-      " Using coc-nvim
-      return 0
-    elseif fnamemodify(a:path, ':e') == 'python'
-      " Using coc-nvim
-      return 0
-    elseif fnamemodify(a:path, ':e') == 'sh'
-      return 1
-    endif
+"fugitive
+nnoremap <silent>gb :Gblame<Enter>
 
-    return 0
-endfunction
-let g:gutentags_enabled_user_func = 'GutentagsFilter'
-let g:gutentags_ctags_tagfile = '.tags'
+"vim gutter
+nmap gc <Plug>(GitGutterPreviewHunk)
+nmap gn <Plug>(GitGutterNextHunk)
+nmap gp <Plug>(GitGutterPrevHunk)
+nmap <leader>u <Plug>(GitGutterUndoHunk)
+
+"git messenger
+nmap <silent> gm <Plug>(git-messenger)
+
+"git messenger
+nmap <silent> mm :Man<Enter>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+source ~/.vim/configs/coc.vim
+
+source ~/.vim/configs/vim-lsp-cxx-highlight.vim
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" WARNING: coc.nvim test in progress
 
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
+"""""""""""" TEST for 24-bit colors
+" 24-bit color support
+"set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Undercurl support
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap for do codeAction of selected region
+"
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
 endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Need ccls
-au FileType cpp nmap <silent> <C-]> <Plug>(coc-definition)
-au FileType c nmap <silent> <C-]> <Plug>(coc-definition)
-" Need coc-python
-au FileType python nmap <silent> <C-]> <Plug>(coc-definition)
-" Need coc-rls
-au FileType rust nmap <silent> <C-]> <Plug>(coc-definition)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NOTE: needs nvim commit 2ca8f02a6461fd4710c4ecc555fbe7ee9f75a70a
+"
+" HOWTO use :lua peek_definition() on a valid symbol
+lua << EOF
+local function preview_location_callback(_, method, result)
+  if result == nil or vim.tbl_isempty(result) then
+    vim.lsp.log.info(method, 'No location found')
+    return nil
+  end
+  if vim.tbl_islist(result) then
+    vim.lsp.util.preview_location(result[1])
   else
-    call CocAction('doHover')
-  endif
+    vim.lsp.util.preview_location(result)
+  end
+end
+
+function pd()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
+EOF
+" TESTS
+
+function! TestFloating()
+    let buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(buf, 0, -1, v:true, ["test", "text"])
+    let opts = {'relative' : 'window', 'width': 100, 'height': 100, 'col': 0,
+        \ 'row': 1, 'anchor': 'NW', 'style': 'minimal'}
+    let win = nvim_open_win(buf, 0, opts)
+    " optional: change highlight, otherwise Pmenu is used
+    call nvim_win_set_option(win, 'winhl', 'Normal:MyHighlight')
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-" NOTE: requires :CocInstall coc-hightlight
-set updatetime=300
-hi CocHighlightText ctermbg=18
-autocmd CursorHold * call CocActionAsync('highlight')
+function! CreateCenteredFloatingWindow()
+    let width = float2nr(&columns * 0.6)
+    let height = float2nr(&lines * 0.6)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CHANGELOG
-" - enable coc.nvim
-" - use coc-python and ccls with coc
-" - disable YCM
-" - disable gutentags everywhere
-" - Map C-] for cpp / python
-" - installed coc-rls, disabled vim-racer and rust.vim
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+endfunction
+
