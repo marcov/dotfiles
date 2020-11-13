@@ -70,7 +70,8 @@ plugins=(colored-man-pages colorize docker git git-extras gnu-utils kubectl kube
 # The TERM env is now set by alacritty automatically.
 # However, it requires a workaround for LS_COLORS ...
 if [ "$TERM" = "alacritty" ]; then
-    eval "$(TERM=xterm-256color dircolors --sh)"
+    [ "$(uname -s)" = Darwin ] && local dirColorsCmd="gdircolors" || local dirColorsCmd="dircolors"
+    eval "$(TERM=xterm-256color ${dirColorsCmd} --sh)"
     export USER_LS_COLORS="$LS_COLORS"
 fi
 
