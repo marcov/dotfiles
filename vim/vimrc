@@ -158,7 +158,7 @@ Plug 'mileszs/ack.vim'
 "Plug 'Txtfmt-The-Vim-Highlighter'
 
 " spell checking - use zg to add a word to dictionary
-Plug 'reedes/vim-lexical'
+" Plug 'reedes/vim-lexical'
 
 " C syntax highlighting
 "Plug 'bbchung/Clamp'
@@ -210,7 +210,7 @@ Plug 'wellle/context.vim'
 "Plug 'vimwiki/vimwiki'
 
 " easy motion
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 
 " C/C++ code highlighting using coc + ccls
 Plug 'jackguo380/vim-lsp-cxx-highlight'
