@@ -27,7 +27,8 @@ set showmatch                   " show matching brackets/parenthesis
 set incsearch                   " find as you type search
 set hlsearch                    " highlight search terms
 
-" Case sensitive when an uppercase letter is present
+" Search is NOT case sensitive when the searched text is all lowercase
+" Search becomes case sensitive when at least an uppercase letter is present
 set ignorecase
 set smartcase
 
