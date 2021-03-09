@@ -349,6 +349,12 @@ autocmd FileType go set noexpandtab
 "" use gopls for GoDef, GoInfo
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+"" Use Coc for Go go-to-definition, mapped to CTRL-]
+let g:go_def_mapping_enabled = 0
+"" Use Coc for Go go-to-documentation, mapped to K
+let g:go_doc_keywordprg_enabled = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""" Syntastic
 "set statusline+=%#warningmsg#

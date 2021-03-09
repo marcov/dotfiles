@@ -53,6 +53,11 @@ au FileType python nmap <silent> <C-]> <Plug>(coc-definition)
 " Need coc-rls
 au FileType rust nmap <silent> <C-]> <Plug>(coc-definition)
 
+" Need "golang" definition in CocConfig -> languageserver
+" Note that if using vim-go, it defines its own mapping, so
+" so you may want to disable it with `let g:go_def_mapping_enabled = 1'
+au FileType go nmap <silent> <C-]> <Plug>(coc-definition)
+
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
