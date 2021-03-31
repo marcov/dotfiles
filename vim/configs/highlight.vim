@@ -101,11 +101,21 @@ highlight WarningMsg ctermfg=yellow cterm=bold ctermbg=237
 " DiffAdd: an added line
 " DiffDelete: the empty lines, complements DiffAdd
 " Folded: The hunk marker
-highlight DiffChange ctermbg=none
+highlight DiffChange ctermfg=yellow ctermbg=none
 highlight DiffText ctermfg=yellow ctermbg=30 cterm=italic,bold
-highlight DiffAdd ctermfg=252 ctermbg=22 cterm=bold
-highlight DiffDelete ctermfg=232 ctermbg=232
+highlight DiffAdd ctermbg=22 cterm=bold
+" fix gutter `-` sign being black, almost invisible
+highlight DiffDelete ctermfg=1 ctermbg=234
+highlight GitGutterDelete ctermfg=1 ctermbg=234 cterm=bold
 highlight Folded ctermfg=11 ctermbg=236
+
+"highlight GitGutterAdd ctermfg=22 cterm=bold
+"highlight GitGutterChange ctermfg=yellow cterm=bold
+"
+"" Fix highlighting being too strong.
+" NOTE: this was commented out from coc source code: ~/.vim/plugged/coc.nvim/plugin/coc.vim
+highlight! CocInfoSign ctermbg=234 ctermfg=white
+highlight! clear CocInfoSign
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " markdown italic should be shown as italic

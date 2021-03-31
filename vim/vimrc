@@ -414,10 +414,6 @@ nmap gc <Plug>(GitGutterPreviewHunk)
 nmap gn <Plug>(GitGutterNextHunk)
 nmap gp <Plug>(GitGutterPrevHunk)
 nmap <leader>u <Plug>(GitGutterUndoHunk)
-" fix guttern `-` sign being black, almost invisible
-highlight GitGutterDelete ctermfg=red ctermbg=234 cterm=bold
-"highlight GitGutterAdd ctermfg=22 cterm=bold
-"highlight GitGutterChange ctermfg=yellow cterm=bold
 
 "git messenger
 nmap <silent> gm <Plug>(git-messenger)
@@ -430,6 +426,7 @@ nmap <silent> mm :Man<Enter>
 source ~/.vim/configs/coc.vim
 
 source ~/.vim/configs/vim-lsp-cxx-highlight.vim
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

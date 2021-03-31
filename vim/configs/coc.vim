@@ -76,17 +76,19 @@ set updatetime=300
 " History
 "
 " v1: ctermbg=18
-hi CocHighlightText ctermbg=19
-"autocmd CursorHold * call CocActionAsync('highlight')
-autocmd CursorHold * call CocHiIfSmallFile()
+highlight CocHighlightText ctermbg=19
 
+"" coc-highlight disabled because it hogs CPU
+"
+"autocmd CursorHold * call CocHiIfSmallFile()
 function CocHiIfSmallFile()
   if line('$') < 5000
     "echom "coc-highlight now!"
     call CocActionAsync('highlight')
   else
-    echom "coc-hihglight off, too many lines in file"
+    echom "coc-highlight off, file is too large"
   endif
 endfunction
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

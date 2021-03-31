@@ -8,7 +8,8 @@ nnoremap  <C-g> :Ag<CR>
 
 " Use neovim floating window for fzf
 if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
+  let $FZF_DEFAULT_OPTS .=' --layout=reverse'
+  let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
   function! FloatingFZF()
     let height = &lines
