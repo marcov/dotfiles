@@ -76,7 +76,20 @@ if [ "$TERM" = "alacritty" ]; then
     export USER_LS_COLORS="$LS_COLORS"
 fi
 
+#
+## WARNING: custom tab completions: do it _BEFORE sourcing oh_my_zsh.sh
+# to avoid to call `autoload -U compinit && compinit' another time
+# `curl https://cheat.sh/:zsh > ~/.zsh.d/completion/_cht`
+fpath=($fpath ~/.zsh.d/completion/)
+
+################################################################################
+
+#
+# Here's where the magic happens...
+#
 source $ZSH/oh-my-zsh.sh
+
+################################################################################
 
 ## WARNING: PROMPT customization: do it _AFTER_ sourcing oh_my_zsh.sh
 
@@ -191,10 +204,6 @@ if [ -f '/home/marco/google-cloud-sdk/path.zsh.inc' ]; then . '/home/marco/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/marco/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/marco/google-cloud-sdk/completion.zsh.inc'; fi
-
-# This is for tab completions
-# `curl https://cheat.sh/:zsh > ~/.zsh.d/_cht`
-fpath=(~/.zsh.d/ $fpath)
 
 ################################################################################
 # Do not mind what's below this ...
