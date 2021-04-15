@@ -10,7 +10,7 @@
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  # TERM: alacritty
 
 #window:
   # Window dimensions (changes require restart)
@@ -138,18 +138,22 @@ font:
     #style: Bold Italic
 
   normal:
-      #family: MesloLGMDZ Nerd Font Mono
+    #family: MesloLGMDZ Nerd Font Mono
+    #family: SF Mono
     family: JetBrainsMono Nerd Font Mono
     style: Regular
   bold:
     #family: MesloLGMDZ Nerd Font Mono
+    #family: SF Mono
     family: JetBrainsMono Nerd Font Mono
     style: Bold
   italic:
     #family: MesloLGMDZ Nerd Font Mono
+    #family: SF Mono
     family: JetBrainsMono Nerd Font Mono
     style: Italic
   bold_italic:
+    #family: SF Mono
     family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
 
