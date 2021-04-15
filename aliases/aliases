@@ -16,8 +16,12 @@ alias ips6="ip -c -br -6 -h address show"
 # Use for extra ignores the `.ignore' file in the CWD
 alias ag="ag --hidden --ignore-dir .git --ignore .tags --path-to-ignore .ignore"
 
-# make fd search even in .gitignore file paths
-alias fd='fd --no-ignore'
+# fd:
+# --hidden: search in hidden dirs
+# --no-ignore-vcs: search files/directories that would otherwise be ignored by '.gitignore' files,
+#              but still DO take into account ignores specified in '.ignore', '.fdignore',
+#              or the global ignore file
+alias fd="fd --hidden --no-ignore-vcs"
 
 # weather asciiart - stolen from jlefrique :)
 alias wtr='curl wttr.in'
@@ -59,6 +63,9 @@ alias nocolors="sed 's/\x1b\[[0-9;]*m//g'"
 
 #alias background='__background(){ start-stop-daemon --start -b --exec $1 }; __background'
 
+# Open manpages with nvim as pager
+alias mman="MANWIDTH=100 MANPAGER='nvim +Man!' man 7 signal"
+
 ################################################################################
 # Override TERM, in case weird artifacts are showing up with these applications
 
@@ -67,3 +74,4 @@ alias nocolors="sed 's/\x1b\[[0-9;]*m//g'"
 #
 alias cgdb="TERM=screen-256color cgdb"
 alias gdb="TERM=screen-256color gdb"
+
