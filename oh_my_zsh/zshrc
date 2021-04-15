@@ -61,15 +61,16 @@ ZSH_COLORIZE_STYLE="inkpot"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages colorize docker git git-extras gnu-utils kubectl kube-ps1 sudo systemd rust cargo fzf ubuntu)
-
-# User configuration
-# export MANPATH="/usr/local/man:$MANPATH"
+#
+# kube-ps1: K8s prompt for zsh
+# rust cargo: disabled since we are not doing Rust dev atm :-(
+plugins=(aws colored-man-pages colorize docker fzf git git-extras gnu-utils kubectl minikube sudo systemd ubuntu)
 
 # TERM
 # The TERM env is now set by alacritty automatically.
-# However, it requires a workaround for LS_COLORS ...
 if [ "$TERM" = "alacritty" ]; then
+
+    # Workaround for LS_COLORS on macOS
     [ "$(uname -s)" = Darwin ] && local dirColorsCmd="gdircolors" || local dirColorsCmd="dircolors"
     eval "$(TERM=xterm-256color ${dirColorsCmd} --sh)"
     export USER_LS_COLORS="$LS_COLORS"
@@ -77,9 +78,10 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-## PROMPT customization (do it after sourcing oh_my_zsh...
-#
-# if there is at least a BG job, print the number of jobs ('%j'), else print nothing
+## WARNING: PROMPT customization: do it _AFTER_ sourcing oh_my_zsh.sh
+
+# Show background jobs as [N] PROMPT prefix
+# If there is at least a BG job, print the number of jobs ['%j'], else print nothing
 local show_bg_jobs="%(1j.[%j] .)"
 
 PROMPT='${show_bg_jobs}'"$PROMPT"
@@ -100,7 +102,7 @@ PROMPT='${show_bg_jobs}'"$PROMPT"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Do not auto-cd in a folder when typing just its name
+# Do NOT auto-cd in a folder, when entering just its name
 unsetopt AUTO_CD
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -134,7 +136,7 @@ zstyle ':completion:*' accept-exact false
 # Make C-u key combination work like in bash (delete from cursor til Begin of Line)
 bindkey \^U backward-kill-line
 
-# History
+# Make History Great Again
 export HISTSIZE=10000000
 export HISTFILESIZE=10000000
 export SAVEHIST=$HISTSIZE
@@ -171,10 +173,11 @@ if command -v ag &>/dev/null; then
     # Extract alias command line
     ag="$(sed -E "s,^.+='(.*)'$,\1," <<< ${aliased})"
 
+    ### FIXME!
     extraIgnore=
     #[ -n "$FOOOOOBAR" ] && extraIgnore="-p ~/.extraignore"
 
-    ### FIXME!
+    # -g: print filenames matching PATTERN
     export FZF_DEFAULT_COMMAND="$ag ${extraIgnore}"' -g  ""'
 fi
 
@@ -193,6 +196,11 @@ if [ -f '/home/marco/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/marco
 # `curl https://cheat.sh/:zsh > ~/.zsh.d/_cht`
 fpath=(~/.zsh.d/ $fpath)
 
+################################################################################
+# Do not mind what's below this ...
+
+if false; then
+
 # This is for using a key shortcut for `fg`:
 do_fg() {
   fg
@@ -200,10 +208,12 @@ do_fg() {
 zle -N do_fg
 # ctrl-x
 # bash-style: bind '"\C-x":"fg\015"'
-#bindkey "\Cx" do_fg
+bindkey "\Cx" do_fg
 
 # ctrl-z
 # bash style: bind '"\C-z":"fg\015"'
 # zsh style: (need to undefine ctrl-z with stty)
 #stty susp undef
-#bindkey "\Cz" do_fg
+bindkey "\Cz" do_fg
+
+fi

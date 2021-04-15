@@ -53,8 +53,13 @@ alias debinfo='__debinfo(){ apt-cache show $1 }; __debinfo'
 # Git branch
 alias gb='git rev-parse --abbrev-ref HEAD'
 
+# Removes ANSI color escape sequences from STDIN.
+# Use by piping text thru it.
+alias nocolors="sed 's/\x1b\[[0-9;]*m//g'"
+
 #alias background='__background(){ start-stop-daemon --start -b --exec $1 }; __background'
 
+################################################################################
 # Override TERM, in case weird artifacts are showing up with these applications
 
 # TERM set to "xterm-*" does NOT work with cgdb inside tmux, see:
@@ -62,6 +67,3 @@ alias gb='git rev-parse --abbrev-ref HEAD'
 #
 alias cgdb="TERM=screen-256color cgdb"
 alias gdb="TERM=screen-256color gdb"
-
-# Same may be needed for vi depending on your terminal
-#alias vi="TERM=screen-256color vi"
