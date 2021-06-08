@@ -21,15 +21,16 @@ alias ag="ag --hidden --ignore-dir .git --ignore .tags --path-to-ignore .ignore"
 # --no-ignore-vcs: search files/directories that would otherwise be ignored by '.gitignore' files,
 #              but still DO take into account ignores specified in '.ignore', '.fdignore',
 #              or the global ignore file
-alias fd="fd --hidden --no-ignore-vcs"
+# --exclude '.git/': needed since we are using --no-ignore-vcs
+alias fd="fd --hidden --no-ignore-vcs --exclude '.git/'"
 
 # weather asciiart - stolen from jlefrique :)
 alias wtr='curl wttr.in'
 alias wtrnow='curl "wttr.in?0"'
 # fiobe weather
-alias fiobe_realtime='curl -s http://fiobbio.blogdns.net/realtime.json'
-alias rain='fiobe_realtime | jq .dailyRain -r'
-alias temp='fiobe_realtime | jq .outsideTemp -r'
+alias _fiobe_realtime='curl -Ls https://meteo.fiobbio.com/realtime.json'
+alias rain='_fiobe_realtime | jq .dailyRain -r'
+alias temp='_fiobe_realtime | jq .outsideTemp -r'
 
 # decimal 2 hex
 alias d2h='__d2h(){ echo -n 0x; bc <<<"obase=16; ibase=10; ${1}"}; __d2h'
@@ -75,3 +76,4 @@ alias mman="MANWIDTH=100 MANPAGER='nvim +Man!' man 7 signal"
 alias cgdb="TERM=screen-256color cgdb"
 alias gdb="TERM=screen-256color gdb"
 
+alias cscope="EDITOR='nvim-noconfig' cscope"
